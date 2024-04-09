@@ -108,6 +108,7 @@
 \raggedbottom% prevent adding vertical white space in strange places
 %- default pagestyle is page number at bottom without headers and footers
 \pagestyle{plain}
+%\pagestyle{fancy}
 %---------------------------------------------------------------------------%
 %->> Style control commands
 %---------------------------------------------------------------------------%
@@ -189,15 +190,15 @@
     }}%
     \cleardoublepage
     \thispagestyle{empty}
+    {\ucas@value@schoollogo}
     \begin{center}
         \linespread{1.5}
         \zihao{4}\bfseries
 
         \hfill{} \ucasifstrbk{\ucas@value@confidential}{}{\ucas@label@confidential \ulenhance{\ulextend[50pt]{\hspace*{-\ulhshift}\zihao{5}\ucas@value@confidential}}}
 
-        \vspace*{\stretch{4}}
+        % \vspace*{\stretch{4}}
 
-        {\ucas@value@schoollogo}
 
         \vspace*{\stretch{2}}
 
@@ -223,7 +224,7 @@
             % \ucas@label@degree & \ulenhance[1.2pt]{\ulextend{\ucas@value@degreetype\ucas@value@degree}}\\
         \end{tabular}
 
-        \vspace*{\stretch{4.5}}
+        \vspace*{\stretch{6}}
 
         {上海科技大学教学事务处制}\\
         {\ucas@value@chinesedate}
@@ -280,6 +281,7 @@
 \newcommand{\makeenglishtitle}{%
     \cleardoublepage
     \thispagestyle{empty}
+    {\ucas@value@schoollogo}
     \begin{center}
         \linespread{1.5}
         \zihao{4}\bfseries
@@ -312,9 +314,7 @@
 
         {Made by Office of Academic Affairs, ShanghaiTech University}
 
-        \vspace*{\stretch{1}}
-
-        {\ucas@value@englishdate}
+        {\ucas@label@englishdate\ucas@value@englishdate}
 
         \vspace*{\stretch{3}}
     \end{center}
@@ -329,7 +329,7 @@
 %---------------------------------------------------------------------------%
 \newcommand{\makedeclaration}{%
     \cleardoublepage
-    \thispagestyle{empty}
+    \thispagestyle{fancy}
     {
         \linespread{1.5}
         \zihao{-4}

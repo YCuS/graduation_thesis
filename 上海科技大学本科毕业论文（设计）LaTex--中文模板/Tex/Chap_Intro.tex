@@ -1,45 +1,10 @@
 \chapter{引言}\label{chap:introduction}
+动力系统模型的发展背景可追溯到20世纪50年代，在控制理论和系统工程领域取得了巨大进展。最初，动力系统模型主要应用于工程和物理系统的建模和控制，如机械系统、电路系统等\cite{hargrove1998dynamic}。随着对生物系统的深入研究和理解，人们开始将动力系统模型应用于生物医学领域，尤其是在糖尿病管理中的应用引起了广泛关注\cite{ellner2006dynamic}。
 
-\section{研究背景}
+随着社会的快速发展和人们生活水平的提高，糖尿病已经成为全球性的健康问题之一。据世界卫生组织（WHO）统计，全球约有4.65亿人患有糖尿病，而这一数字还在不断增长\cite{zimmet2016diabetes}。糖尿病是一种慢性疾病，患者需要长期控制血糖水平，以避免发生严重的并发症，如心血管疾病、肾病、视网膜病变等\cite{zheng2018global}。因此，实现对血糖水平的准确预测对于糖尿病患者的管理至关重要。
 
-考虑到许多同学可能缺乏\LaTeX{}使用经验，ucasthesis将\LaTeX{}的复杂性高度封装，开放出简单的接口，以便轻易使用。同时，对用\LaTeX{}撰写论文的一些主要难题，如制图、制表、文献索引等，进行了详细说明，并提供了相应的代码样本，理解了上述问题后，对于初学者而言，使用此模板撰写学位论文将不存在实质性的困难。所以，如果你是初学者，请不要直接放弃，因为同样为初学者的我，十分明白让\LaTeX{}简单易用的重要性，而这正是ucasthesis所追求和体现的。
+生理调节的数学模型作为推动科学发展的重要理论工具，在了解生物过程、设计健康调节和疾病标志物、探索健康与非健康状态下的发病机制等方面发挥着重要作用\cite{bakhti2019modelling}。随着可穿戴监测设备的使用增加\cite{kim2020wearable}，连续血糖监测（CGM）等技术的发展，我们可以获取日常生活中的更多数据，根据这些数据我们可以将数学模型用于跟踪糖尿病的进展\cite{ha2020type}，并制定合理的预测疾病以及治疗策略。
 
-此中国科学院大学学位论文模板ucasthesis基于中科院数学与系统科学研究院吴凌云研究员的CASthesis模板发展而来。当前ucasthesis模板满足最新的中国科学院大学学位论文撰写要求和封面设定。兼顾操作系统：Windows，Linux，MacOS 和\LaTeX{}编译引擎：pdflatex，xelatex，lualatex。支持中文书签、中文渲染、中文粗体显示、拷贝PDF中的文本到其他文本编辑器等特性。此外，对模板的文档结构进行了精心设计，撰写了编译脚本提高模板的易用性和使用效率。
+在过去的几十年中，随着计算机技术的迅速发展和生物医学工程领域的不断进步，动力系统模型在实时血糖预测中的应用逐渐引起了人们的关注。动力系统模型可以描述生物系统中各种生理、代谢过程之间的相互作用，并通过数学模型来模拟这些过程的动态变化\cite{cobelli2009diabetes}。血糖调节作为内分泌系统的不可分割部分，其复杂的结果涉及血浆内发生的生化相互作用、肌肉和器官的调节\cite{zavala2019mathematical}。通过对糖尿病患者的生理数据进行监测和分析，结合动力系统模型，可以实现对患者未来一段时间内血糖水平的准确预测，从而指导医生和患者采取合适的治疗策略，提高糖尿病管理的效果。
 
-ucasthesis的目标在于简化学位论文的撰写，通过模板文档的默认规范设定，论文作者可以将精力集中在论文的内容上，而不需在版面设置上花费过多精力。 同时，ucasthesis的各命令有着扼要的注解和整洁一致的代码结构，对文档的仔细阅读可以为初学者提供一个学习\LaTeX{}的窗口。此外，整个模板的架构十分注重通用性，事实上，ucasthesis不仅是国科大学位论文模板，同时，通过少量修改便可成为使用\LaTeX{}撰写中英文文章或书籍的通用模板，并为使用者的个性化设定提供了接口和相应的代码。
-
-\section{系统要求}\label{sec:system}
-
-\href{https://github.com/mohuangrui/ucasthesis}{\texttt{ucasthesis}} 宏包可以在目前主流的 \href{https://en.wikibooks.org/wiki/LaTeX/Introduction}{\LaTeX{}} 编译系统中使用，例如C\TeX{}套装 （请勿混淆C\TeX{}套装与ctex宏包。C\TeX{}套装是集成了许多\LaTeX{}组件的\LaTeX{}编译系统，因已停止维护，\textbf{不再建议使用}。 \href{https://ctan.org/pkg/ctex?lang=en}{ctex} 宏包如同ucasthesis，是\LaTeX{}命令集，其维护状态活跃，并被主流的\LaTeX{}编译系统默认集成，是几乎所有\LaTeX{}中文文档的核心架构。）、MiK\TeX{}（维护较不稳定，\textbf{不太推荐使用}）、\TeX{}Live。推荐的 \href{https://en.wikibooks.org/wiki/LaTeX/Installation}{\LaTeX{}编译系统} 和 \href{https://en.wikibooks.org/wiki/LaTeX/Installation}{\LaTeX{}文本编辑器} 为
-\begin{center}
-    %\footnotesize% fontsize
-    %\setlength{\tabcolsep}{4pt}% column separation
-    %\renewcommand{\arraystretch}{1.5}% row space 
-    \begin{tabular}{lcc}
-        \hline
-        %\multicolumn{num_of_cols_to_merge}{alignment}{contents} \\
-        %\cline{i-j}% partial hline from column i to column j
-        操作系统 & \LaTeX{}编译系统 & \LaTeX{}文本编辑器\\
-        \hline
-        Linux & \href{https://www.tug.org/texlive/acquire-netinstall.html}{\TeX{}Live Full} & \href{http://www.xm1math.net/texmaker/}{Texmaker}\\
-        MacOS & \href{https://www.tug.org/mactex/}{Mac\TeX{} Full} & \href{http://www.xm1math.net/texmaker/}{Texmaker}\\
-        Windows & \href{https://www.tug.org/texlive/acquire-netinstall.html}{\TeX{}Live Full} & \href{http://www.xm1math.net/texmaker/}{Texmaker}\\
-        \hline
-    \end{tabular}
-\end{center}
-
-\LaTeX{}编译系统 (如\TeX{}Live) 用于提供编译环境，\LaTeX{}文本编辑器 (如Texmaker) 用于编辑\TeX{}源文件。请从各软件的官网下载安装程序，勿使用其它程序源。\textbf{\LaTeX{}编译系统和\LaTeX{}编辑器分别安装成功后，用户即完成了\LaTeX{}的系统配置}，无需其他手动干预和配置。若用户的系统原带有旧版的\LaTeX{}编译系统并想安装新版，请\textbf{先卸载干净旧版再安装新版}。
-
-\section{问题反馈}
-
-关于\LaTeX{}的知识性问题，请查阅 \href{https://github.com/mohuangrui/ucasthesis/wiki}{ucasthesis和\LaTeX{}知识小站} 和 \href{https://en.wikibooks.org/wiki/LaTeX}{\LaTeX{} Wikibook}。
-
-关于模板编译和样式设计的问题，请\textbf{先仔细阅读此说明文档，特别是“常见问题”（章节~\ref{sec:qa}）}。若问题仍无法得到解决，请\textbf{先将问题理解清楚并描述清楚，再将问题反馈}至 \href{https://github.com/mohuangrui/ucasthesis/issues}{Github/ucasthesis/issues}。
-
-欢迎大家有效地反馈模板不足之处，一起不断改进模板。希望大家向同事积极推广\LaTeX{}，一起更高效地做科研。
-
-\section{模板下载}
-
-\begin{center}
-    \href{https://github.com/mohuangrui/ucasthesis}{Github/ucasthesis}: \url{https://github.com/mohuangrui/ucasthesis}
-\end{center}
+本文将重点研究动力系统模型在实时血糖预测中的应用。首先，我们将介绍动力系统模型的基本概念和相关理论，包括动力系统、混沌、不动点、吸引子、极限环等。然后介绍血糖动力系统中的一些常见模型即其原理，并且对这些模型进行相应的模型分析和算法分析，之后利用收集的数据进行模型拟合，比较分析各模型的优缺点，用拟合的模型进行血糖预测，尽可能接近真实血糖数据。

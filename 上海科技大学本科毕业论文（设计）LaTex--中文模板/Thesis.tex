@@ -11,7 +11,7 @@
 %---------------------------------------------------------------------------%
 %->> Document class declaration
 %---------------------------------------------------------------------------%
-\documentclass[doublesided]{Style/ucasthesis}%
+\documentclass[singlesided]{Style/ucasthesis}%
 %- Multiple optional arguments:
 %- [<singlesided|doublesided|printcopy>]% set one or two sided eprint or print
 %- [draftversion]% show draft version information
@@ -21,7 +21,7 @@
 %---------------------------------------------------------------------------%
 %->> Document settings
 %---------------------------------------------------------------------------%
-\usepackage[authoryear,myhdr,list]{Style/artratex}% document settings
+\usepackage[super,myhdr,list]{Style/artratex}% document settings
 %- usage: \usepackage[option1,option2,...,optionN]{artratex}
 %- Multiple optional arguments:
 %- [bibtex|biber]% set bibliography processor and package
@@ -69,6 +69,12 @@
 %---------------------------------------------------------------------------%
 %->> Document content
 %---------------------------------------------------------------------------%
+%===========================================================================%
+%===========================================================================%
+%    特别提醒：																%
+%		参考文献需要严格按标准格式来写，常用的为J和C两类：                       %
+%		J代表Journal论文，C代表Conference论文		                         %
+%===========================================================================%
 \begin{document}
 	%-
 	%-> Frontmatter: title page, abstract, content list, symbol list, preface
@@ -80,11 +86,11 @@
 		%\intotoc{\contentsname}% add link to contents table and bookmark
 		\tableofcontents% contents catalog
 		%\intotoc{\listfigurename}% add link to contents table and bookmark
-		\listoffigures% figures catalog
+		%\listoffigures% figures catalog
 		%\intotoc{\listtablename}% add link to contents table and bookmark
-		\listoftables% tables catalog
+		%\listoftables% tables catalog
 	}
-	\input{Tex/Prematter}% list of symbols, preface content
+	% \input{Tex/Prematter}% list of symbols, preface content
 	%-
 	%-> Mainmatter
 	%-
@@ -95,7 +101,7 @@
 	%-
 	\cleardoublepage%
 	\appendix% initialize the environment
-	\input{Tex/Appendix}% appendix content
+	%\input{Tex/Appendix}% appendix content
 	%-
 	%-> Backmatter: bibliography, glossary, index
 	%-

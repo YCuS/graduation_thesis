@@ -470,7 +470,7 @@
     \fancypagestyle{frontmatterstyle}{% style for frontmatter
         \fancyhf{}% clear fields
         % \fancyhead[CE]{\footnotesize \@title}% structure elements
-        \fancyhead[C]{\footnotesize \leftmark}% structure elements
+        % \fancyhead[C]{\footnotesize \leftmark}% structure elements
         \fancyhead[L]{\includegraphics[width=8em]{../Img/ShanghaiTech_Logo.png}}
         \fancyhead[R]{\footnotesize \@title}
         \fancyfoot[CE]{\footnotesize \thepage}% page number
@@ -481,24 +481,26 @@
     \fancypagestyle{mainmatterstyle}{% style for mainmatter
         \fancyhf{}% clear fields
         % \fancyhead[CE]{\footnotesize \@title}% structure elements
-        \fancyhead[C]{\footnotesize \CTEXthechapter\ \leftmark}% structure elements
+        % \fancyhead[C]{\footnotesize \CTEXthechapter\ \leftmark}% structure elements
         % \fancyfoot[LE]{\footnotesize \thepage}% page number
         % \fancyfoot[RO]{\footnotesize \thepage}% page number
         \fancyhead[L]{\includegraphics[width=8em]{../Img/ShanghaiTech_Logo.png}}
         \fancyhead[R]{\footnotesize \@title}
-        \fancyfoot[C]{\thepage/\pageref{LastPage}}
+        %\fancyfoot[C]{\thepage/\pageref{LastPage}}
+        \fancyfoot[C]{第\thepage 页 \; 共\pageref{LastPage}页}
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
     }
     \fancypagestyle{backmatterstyle}{% header and footer style for backmatter
         \fancyhf{}% clear fields
         % \fancyhead[CE]{\footnotesize \@title}% structure elements
-        \fancyhead[C]{\footnotesize \leftmark}% structure elements
+        % \fancyhead[C]{\footnotesize \leftmark}% structure elements
         % \fancyfoot[LE]{\footnotesize \thepage}% page number
         % \fancyfoot[RO]{\footnotesize \thepage}% page number
         \fancyhead[L]{\includegraphics[width=8em]{../Img/ShanghaiTech_Logo.png}}
         \fancyhead[R]{\footnotesize \@title}
-        \fancyfoot[C]{\thepage/\pageref{LastPage}}
+        %\fancyfoot[C]{\thepage/\pageref{LastPage}}
+        \fancyfoot[C]{第\thepage 页 \; 共\pageref{LastPage}页}
         \renewcommand{\headrulewidth}{0.8pt}% header rule
         \renewcommand{\footrulewidth}{0pt}% footer rule
     }
