@@ -1,0 +1,123 @@
+\begin{thebibliography}{18}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\providecommand{\href}[2]{\url{#2}}
+\providecommand{\doi}[1]{DOI: \href{http://dx.doi.org/#1}{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
+  \urlstyle{same}\fi
+
+\bibitem[Hargrove(1998)]{hargrove1998dynamic}
+HARGROVE J~L.
+\newblock Dynamic modeling in the health sciences\allowbreak[M].
+\newblock [S.l.]: Springer Science \& Business Media, 1998.
+
+\bibitem[Ellner\ et~al.(2006)Ellner and Guckenheimer]{ellner2006dynamic}
+ELLNER S~P, GUCKENHEIMER J.
+\newblock Dynamic models in biology\allowbreak[M].
+\newblock [S.l.]: Princeton University Press, 2006.
+
+\bibitem[Zimmet\ et~al.(2016)Zimmet, Alberti, Magliano, and
+  Bennett]{zimmet2016diabetes}
+ZIMMET P, ALBERTI K~G, MAGLIANO D~J, et~al.
+\newblock Diabetes mellitus statistics on prevalence and mortality: facts and
+  fallacies\allowbreak[J].
+\newblock Nature Reviews Endocrinology, 2016, 12\penalty0 (10): 616--622.
+
+\bibitem[Zheng\ et~al.(2018)Zheng, Ley, and Hu]{zheng2018global}
+ZHENG Y, LEY S~H, HU F~B.
+\newblock Global aetiology and epidemiology of type 2 diabetes mellitus and its
+  complications\allowbreak[J].
+\newblock Nature reviews endocrinology, 2018, 14\penalty0 (2): 88--98.
+
+\bibitem[Bakhti\ et~al.(2019)Bakhti, B{\"o}ttcher, and
+  Lickert]{bakhti2019modelling}
+BAKHTI M, B{\"O}TTCHER A, LICKERT H.
+\newblock Modelling the endocrine pancreas in health and disease\allowbreak[J].
+\newblock Nature Reviews Endocrinology, 2019, 15\penalty0 (3): 155--171.
+
+\bibitem[Kim\ et~al.(2020)Kim, Zavala, and Kim]{kim2020wearable}
+KIM D~W, ZAVALA E, KIM J~K.
+\newblock Wearable technology and systems modeling for personalized
+  chronotherapy\allowbreak[J].
+\newblock Current Opinion in Systems Biology, 2020, 21: 9--15.
+
+\bibitem[Ha\ et~al.(2020)Ha and Sherman]{ha2020type}
+HA J, SHERMAN A.
+\newblock Type 2 diabetes: one disease, many pathways\allowbreak[J].
+\newblock American Journal of Physiology-Endocrinology and Metabolism, 2020,
+  319\penalty0 (2): E410--E426.
+
+\bibitem[Cobelli\ et~al.(2009)Cobelli, Dalla~Man, Sparacino, Magni, De~Nicolao,
+  and Kovatchev]{cobelli2009diabetes}
+COBELLI C, DALLA~MAN C, SPARACINO G, et~al.
+\newblock Diabetes: models, signals, and control\allowbreak[J].
+\newblock IEEE reviews in biomedical engineering, 2009, 2: 54--96.
+
+\bibitem[Zavala\ et~al.(2019)Zavala, Wedgwood, Voliotis, Tabak, Spiga,
+  Lightman, and Tsaneva-Atanasova]{zavala2019mathematical}
+ZAVALA E, WEDGWOOD K~C, VOLIOTIS M, et~al.
+\newblock Mathematical modelling of endocrine systems\allowbreak[J].
+\newblock Trends in Endocrinology \& Metabolism, 2019, 30\penalty0 (4):
+  244--257.
+
+\bibitem[Strogatz(2018)]{strogatz2018nonlinear}
+STROGATZ S~H.
+\newblock Nonlinear dynamics and chaos: with applications to physics, biology,
+  chemistry, and engineering\allowbreak[M].
+\newblock [S.l.]: CRC press, 2018.
+
+\bibitem[Bergman\ et~al.(1979)Bergman, Ider, Bowden, and
+  Cobelli]{bergman1979quantitative}
+BERGMAN R~N, IDER Y~Z, BOWDEN C~R, et~al.
+\newblock Quantitative estimation of insulin sensitivity.\allowbreak[J].
+\newblock American Journal of Physiology-Endocrinology And Metabolism, 1979,
+  236\penalty0 (6): E667.
+
+\bibitem[Bergman\ et~al.(1985)Bergman, Finegood, and
+  Ader]{bergman1985assessment}
+BERGMAN R~N, FINEGOOD D~T, ADER M.
+\newblock Assessment of insulin sensitivity in vivo\allowbreak[J].
+\newblock Endocrine reviews, 1985, 6\penalty0 (1): 45--86.
+
+\bibitem[Best\ et~al.(1981)Best, Taborsky~Jr, Halter, and
+  Porte~Jr]{best1981glucose}
+BEST J~D, TABORSKY~JR G~J, HALTER J~B, et~al.
+\newblock Glucose disposal is not proportional to plasma glucose level in
+  man\allowbreak[J].
+\newblock Diabetes, 1981, 30\penalty0 (10): 847--850.
+
+\bibitem[Topp\ et~al.(2000)Topp, Promislow, Devries, Miura, and
+  T~FINEGOOD]{topp2000model}
+TOPP B, PROMISLOW K, DEVRIES G, et~al.
+\newblock A model of $\beta$-cell mass, insulin, and glucose kinetics: pathways
+  to diabetes\allowbreak[J].
+\newblock Journal of theoretical biology, 2000, 206\penalty0 (4): 605--619.
+
+\bibitem[Bridgewater\ et~al.(2020)Bridgewater, Huard, and
+  Angelova]{bridgewater2020amplitude}
+BRIDGEWATER A, HUARD B, ANGELOVA M.
+\newblock Amplitude and frequency variation in nonlinear glucose dynamics with
+  multiple delays via periodic perturbation\allowbreak[J].
+\newblock Journal of Nonlinear Science, 2020, 30\penalty0 (3): 737--766.
+
+\bibitem[Finegood\ et~al.(1995)Finegood, Scaglia, and
+  Bonner-Weir]{finegood1995dynamics}
+FINEGOOD D~T, SCAGLIA L, BONNER-WEIR S.
+\newblock Dynamics of $\beta$-cell mass in the growing rat pancreas: estimation
+  with a simple mathematical model\allowbreak[J].
+\newblock Diabetes, 1995, 44\penalty0 (3): 249--256.
+
+\bibitem[Huard\ et~al.(2022)Huard and Kirkham]{huard2022mathematical}
+HUARD B, KIRKHAM G.
+\newblock Mathematical modelling of glucose dynamics\allowbreak[J].
+\newblock Current Opinion in Endocrine and Metabolic Research, 2022, 25:
+  100379.
+
+\bibitem[Vigersky\ et~al.(2017)Vigersky and Shrivastav]{vigersky2017role}
+VIGERSKY R, SHRIVASTAV M.
+\newblock Role of continuous glucose monitoring for type 2 in diabetes
+  management and research\allowbreak[J].
+\newblock Journal of Diabetes and its Complications, 2017, 31\penalty0 (1):
+  280--287.
+
+\end{thebibliography}
