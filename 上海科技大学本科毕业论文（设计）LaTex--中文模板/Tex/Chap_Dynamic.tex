@@ -18,16 +18,56 @@
     在动力系统模型中，如果系统的状态轨迹表现出无规律、无法预测的行为，并且具有灵敏的初始条件依赖性，那么我们称这种状态为混沌。
 \end{defn}
 
+当出现混沌时，一个看似简单的确定性系统可能会表现出极不稳定的动力学行为，这种情况下我们很难进行预测，并且微小的误差可能导致结果有很大的不同，因此在使用动力系统模型进行预测时，我们需要特别注意混沌现象的出现。混沌现象的出现同时跟选择的模型以及参数范围有关。
+
 \begin{defn}[不动点]
     在动力系统模型中，如果存在一个状态 $\mathbf{x}^*$，使得 $\mathbf{f}(\mathbf{x}^*, t) = 0$，那么我们称这个状态为不动点。
 \end{defn}
+
+由于在非线性系统中研究不动点的性质往往比较困难，因此我们通常会考虑一些线性化方法来研究不动点的特性。
+
+考虑系统
+\begin{equation}
+    \begin{aligned}
+        \dot{x}=f(x,y)\\
+        \dot{y}=g(x,y)
+    \end{aligned}
+\end{equation}
+假定$(x^*,y^*)$为该系统的一个不动点，通过泰勒展开我们可以得到
+\begin{equation}\label{0}
+    \begin{pmatrix}
+        \dot{u}\\
+        \dot{v}
+    \end{pmatrix}=
+    \begin{pmatrix}
+        \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}\\
+        \frac{\partial g}{\partial x} & \frac{\partial g}{\partial y}
+    \end{pmatrix}_{(x^*,y^*)}\begin{pmatrix}
+        u\\ v
+    \end{pmatrix}+\text{二次项}
+\end{equation}
+其中$(u,v)$为$(x^*,y^*)$处的微小扰动，我们将(\ref{0})中去除二次项的部分称为线性化的系统。
+\begin{prop}
+    在二维动力系统中，在不动点处线性化的动力系统，只要不动点不在边界处，那么该线性化动力系统的不动点性质与原动力系统相同。
+\end{prop}
+
+也就是说如果在线性表达式中可以证明不动点是一个吸引子，那么对于原非线性动力系统，该动力系统也是一个吸引子，具体证明可以参考文献\cite{andronov1974qualitative}。
 \begin{defn}[吸引子]
     在动力系统中，如果某一状态或状态集合的邻域内的所有轨迹最终都趋近于该状态或状态集合，则该状态或状态集合称为吸引子。
 \end{defn}
     
 \begin{defn}[极限环]
-    极限环是一个孤立的闭轨迹， 孤立意味着它附近的轨迹不是闭的，它们盘旋着靠近或原理极限环。如果所有邻近轨迹都趋向于极限环，那么我们称这个极限环是稳定的。
+    极限环是一个孤立的闭轨迹， 孤立意味着它附近的轨迹不是闭的，它们盘旋着靠近或原理极限环。如果当时间$t\to +\infty$ 时，所有的邻近轨迹都趋近于极限环，那么所在的流形被称为稳定的，或者称极限环是稳定的（吸引的）。反之，如果$t\to +\infty$ 时，所有的邻近轨迹都远离于极限环，那么称流形是不稳定的或者极限环是不稳定的（非吸引的）。在所有其它情况下，流形既不是稳定也不是不稳定的，或者称极限环是半稳定的。
 \end{defn}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/limit_cycle.png}
+    \caption{从左往右依次为稳定极限环，不稳定极限环和半稳定极限环。}
+    \label{fig:limit_cycle}
+\end{figure}
+
+如图\ref{fig:limit_cycle}，极限环分为三种稳定极限环，不稳定极限环和半稳定极限环。稳定极限环是一个吸引子，不稳定极限环是一个排斥子。
 
 稳定极限环模拟了具有自发维持的振荡系统， 如果系统有轻微的扰动，它会自动恢复到标准周期。
 
@@ -49,7 +89,9 @@
 \end{thm}
 \begin{pf}
     假设有一个闭轨$C$在$R$内，令$A$表示$C$内部的区域，由格林公式可得
-    \[ \iint_A \nabla \cdot(g \frac{d\mathbf{x}}{dt})dA=\oint_C g \frac{d\mathbf{x}}{dt}\cdot \mathbf{n}dl \]
+    \begin{equation}
+        \iint_A \nabla \cdot(g \frac{d\mathbf{x}}{dt})dA=\oint_C g \frac{d\mathbf{x}}{dt}\cdot \mathbf{n}dl
+    \end{equation}
     显然左边不等于0， 而右边等于0，这与假设矛盾，所以$R$上无闭轨。
 \end{pf}
 

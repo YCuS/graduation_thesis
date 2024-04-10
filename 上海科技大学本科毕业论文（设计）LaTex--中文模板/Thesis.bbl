@@ -1,4 +1,4 @@
-\begin{thebibliography}{18}
+\begin{thebibliography}{22}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \providecommand{\href}[2]{\url{#2}}
@@ -59,6 +59,32 @@ ZAVALA E, WEDGWOOD K~C, VOLIOTIS M, et~al.
 \newblock Mathematical modelling of endocrine systems\allowbreak[J].
 \newblock Trends in Endocrinology \& Metabolism, 2019, 30\penalty0 (4):
   244--257.
+
+\bibitem[Pompa\ et~al.(2021)Pompa, Panunzi, Borri, and
+  De~Gaetano]{pompa2021comparison}
+POMPA M, PANUNZI S, BORRI A, et~al.
+\newblock A comparison among three maximal mathematical models of the
+  glucose-insulin system\allowbreak[J].
+\newblock PloS one, 2021, 16\penalty0 (9): e0257789.
+
+\bibitem[Mari\ et~al.(2001)Mari, Pacini, Murphy, Ludvik, and
+  Nolan]{mari2001model}
+MARI A, PACINI G, MURPHY E, et~al.
+\newblock A model-based method for assessing insulin sensitivity from the oral
+  glucose tolerance test\allowbreak[J].
+\newblock Diabetes care, 2001, 24\penalty0 (3): 539--548.
+
+\bibitem[De~Gaetano\ et~al.(2000)De~Gaetano and Arino]{de2000mathematical}
+DE~GAETANO A, ARINO O.
+\newblock Mathematical modelling of the intravenous glucose tolerance
+  test\allowbreak[J].
+\newblock Journal of mathematical biology, 2000, 40: 136--168.
+
+\bibitem[Andronov\ et~al.(1974)Andronov, Leontovich, Gordon, Maier, and
+  Gutzwiller]{andronov1974qualitative}
+ANDRONOV A~A, LEONTOVICH E~A, GORDON I, et~al.
+\newblock Qualitative theory of second-order dynamic systems\allowbreak[J].
+\newblock Physics Today, 1974, 27\penalty0 (8): 53--54.
 
 \bibitem[Strogatz(2018)]{strogatz2018nonlinear}
 STROGATZ S~H.
