@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \providecommand{\href}[2]{\url{#2}}
@@ -80,11 +80,22 @@ DE~GAETANO A, ARINO O.
   test\allowbreak[J].
 \newblock Journal of mathematical biology, 2000, 40: 136--168.
 
+\bibitem[Murray\ et~al.(2013)Murray and Miller]{murray2013existence}
+MURRAY F~J, MILLER K~S.
+\newblock Existence theorems for ordinary differential equations\allowbreak[M].
+\newblock [S.l.]: Courier Corporation, 2013: 50.
+
 \bibitem[Andronov\ et~al.(1974)Andronov, Leontovich, Gordon, Maier, and
   Gutzwiller]{andronov1974qualitative}
 ANDRONOV A~A, LEONTOVICH E~A, GORDON I, et~al.
 \newblock Qualitative theory of second-order dynamic systems\allowbreak[J].
 \newblock Physics Today, 1974, 27\penalty0 (8): 53--54.
+
+\bibitem[Coddington\ et~al.(1956)Coddington, Levinson, and
+  Teichmann]{coddington1956theory}
+CODDINGTON E~A, LEVINSON N, TEICHMANN T.
+\newblock Theory of ordinary differential equations\allowbreak[Z].
+\newblock [S.l.]: American Institute of Physics, 1956: 389--403.
 
 \bibitem[Strogatz(2018)]{strogatz2018nonlinear}
 STROGATZ S~H.

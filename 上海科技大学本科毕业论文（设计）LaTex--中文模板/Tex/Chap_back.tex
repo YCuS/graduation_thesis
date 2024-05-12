@@ -1,0 +1,114 @@
+\chapter{背景介绍}\label{chap:background}
+\section{矩阵特征值和特征向量}
+\begin{defn}[特征值和特征向量]
+    给定一个方阵 \( A \in \mathbb{R}^{n \times n} \)，特征值 \( \lambda \) 和特征向量 \( \mathbf{v} \in \mathbb{R}^n \) 满足以下方程：
+
+\[
+A \mathbf{v} = \lambda \mathbf{v}
+\]
+
+其中 \( \mathbf{v} \neq 0 \) 是特征向量，\( \lambda \) 是对应的特征值。
+\end{defn}
+
+
+\subsection{求解方法}
+
+先给出矩阵的特征方程
+
+    \[
+    \det(A - \lambda I) = 0
+    \]
+
+其中 \( \det \) 表示行列式，\( I \) 是单位矩阵。展开特征方程，得到一个 \( n \) 次多项式方程。通过求解这个方程，得到矩阵 \( A \) 的特征值 \( \lambda \)。 对于每一个特征值 \( \lambda \)，求解以下齐次线性方程组：
+
+    \[
+    (A - \lambda I) \mathbf{v} = 0
+    \]
+
+这个方程组的解即为对应特征值 \( \lambda \) 的特征向量 \( \mathbf{v} \)。
+
+另外，矩阵的迹和行列式也与特征值有关
+\begin{defn}
+    对于一个$n \times n$的矩阵
+    \begin{equation}
+        \mathbf{A}=\begin{pmatrix}
+            a_{11} & a_{12} & \cdots & a_{1n} \\
+            a_{21} & a_{22} & \cdots & a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            a_{n1} & a_{n2} & \cdots & a_{nn}
+        \end{pmatrix}
+    \end{equation}
+    其迹定义为
+    \begin{equation}
+        \text{tr}(\mathbf{A}) = \sum_{i=1}^{n} a_{ii}
+    \end{equation}
+\end{defn}
+\begin{thm}\label{thm:trace_det}
+    矩阵的迹等于其特征值之和,矩阵的行列式等于其特征值之积
+    \begin{equation}
+        \text{tr}(\mathbf{A}) = \sum_{i=1}^{n} \lambda_i，\quad \det(\mathbf{A}) = \prod_{i=1}^{n} \lambda_i
+    \end{equation}
+    其中$\lambda_i$是矩阵$\mathbf{A}$的特征值
+\end{thm}
+\begin{pf}
+   对于矩阵$\mathbf{A}= \begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}$，其特征方程为
+\begin{equation}\label{eq:char_eq}
+    f(\lambda)=\det(\mathbf{A} - \lambda \mathbf{I}) = \left| \begin{array}{cccc}
+        a_{11}-\lambda & a_{12} & \cdots & a_{1n} \\
+        a_{21} & a_{22}-\lambda & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}-\lambda
+    \end{array} \right| = 0
+\end{equation}
+特征多项式的常数项为$f(0)=\det(\mathbf{A})$，即矩阵的行列式。
+对$\mathbf{A}$做Jordan标准型分解，得到$\mathbf{A}= \mathbf{P} \mathbf{J} \mathbf{P}^{-1}$，其中$\mathbf{J}$是Jordan标准型矩阵，$\mathbf{P}$是可逆矩阵。由于$\mathbf{J}$是上三角矩阵，其对角元素即为特征值，所以
+\begin{equation}
+    \text{tr}(\mathbf{A})=\text{tr}(\mathbf{PJP^{-1}})=\text{tr}(\mathbf{PP^{-1}J})=\text{tr}(\mathbf{J})=\sum_{i=1}^{n} \lambda_i。
+\end{equation}
+可知矩阵的迹等于其特征值之和。
+\end{pf}
+\section{巴拿赫(Banach)压缩映射定理}
+\begin{defn}[压缩映射]\label{def:comp_map}
+    对于映射
+\begin{align*}
+    f : (X,d) & \to (X,d) \\
+    x & \mapsto f(x)
+\end{align*}
+其中，$(X,d)$ 是一个以$d$为度量的度量空间，$f$ 是一个映射。如果满足$\forall x, y \in X$，有
+\begin{equation}
+    d(f(x), f(y)) \leq k \cdot d(x, y)
+\end{equation}
+其中，$0 \leq k < 1$，则称$f$是一个压缩映射。
+\end{defn}
+
+\begin{thm}[巴拿赫压缩映射定理]\label{thm:banach}
+    设 $(X, d)$ 是一个非空完备度量空间，$f : X \to X$ 是一个压缩映射。那么，存在唯一的不动点 $x^* \in X$，满足 $f(x^*) = x^*$。
+\end{thm}
+\begin{pf}
+    对于$x_0 \in X$，定义序列$\{x_n\}$为$x_{n+1}=f(x_n)$，对于$\forall n \in \mathbb{N}$，有
+    \begin{equation*}
+        d(x_{n+1}, x_n)  \leq k^n \cdot d(x_1, x_0)
+    \end{equation*}
+    接下来证明$\{x_n\}$是一个柯西序列。对于$\forall m > n$，有
+    \begin{align*}
+        d(x_m, x_n) & = d(f(x_{m-1}), f(x_{n-1})) \\
+        & \leq k^{m-1} \cdot d(x_1, x_0) + k^{m-2} \cdot d(x_1, x_0) + \cdots + k^{n} \cdot d(x_1, x_0) \\
+        & = k^n \cdot d(x_1, x_0) \cdot \sum_{i=0}^{m-n-1} k^i \\
+        & = k^n \cdot d(x_1, x_0) \cdot \frac{1-k^{m-n}}{1-k} \\
+        & \leq k^n \cdot d(x_1, x_0) \cdot \frac{1}{1-k}
+    \end{align*}
+    对于$\forall \epsilon > 0$，取$n_0$使得$k^{n_0} \cdot d(x_1, x_0) \cdot \frac{1}{1-k} < \epsilon$，则对于$\forall m, n > n_0$，有$d(x_m, x_n) < \epsilon$，所以$\{x_n\}$是一个柯西序列。由于$(X, d)$是完备度量空间，所以$\{x_n\}$收敛，设其极限为$x^*$，则有
+    \begin{equation*}
+        x^* = \lim_{n \to \infty} x_n = \lim_{n \to \infty} f(x_{n-1}) = f(\lim_{n \to \infty} x_{n-1}) = f(x^*)
+    \end{equation*}
+    所以$x^*$是$f$的一个不动点。接下来证明$x^*$是唯一的不动点。设$x^*$和$y^*$都是$f$的不动点，则有
+    \begin{equation*}
+        d(x^*, y^*) = d(f(x^*), f(y^*)) \leq k \cdot d(x^*, y^*)
+    \end{equation*}
+    由于$0 \leq k < 1$，所以$d(x^*, y^*) = 0$，即$x^* = y^*$，所以$x^*$是唯一的不动点。
+\end{pf}

@@ -1,17 +1,19 @@
 \chapter{动力系统基础}\label{chap:dynamic}
 
 
-\section{动力系统模型概述}
+\section{动力系统概述}
 动力系统模型是一种数学工具，用于描述物理系统、生物系统或其他系统随时间演化的行为。它通常基于微分方程或差分方程，通过描述系统内部的状态变量之间的关系来预测系统未来的行为。
 
 动力系统模型可以分为线性模型和非线性模型两种。线性模型假设系统的行为是线性的，通常用线性微分方程或差分方程来描述；而非线性模型则考虑系统的非线性效应，通常需要更复杂的数学形式来描述系统的行为。
 
 \begin{defn}[动力系统]
-一个动力系统可以定义为一个状态空间 $\mathcal{X}$ 上的一组微分方程：
-\begin{align}
-\frac{d\mathbf{x}}{dt} &= \mathbf{f}(\mathbf{x}, t), \quad \mathbf{x} \in \mathcal{X}, \ t \in [0, T]
-\end{align}
-其中 $\mathbf{x}$ 是状态向量，$\mathbf{f}(\mathbf{x}, t)$ 是系统的动力学方程，$T$ 是观测时间的结束点。
+    一个动力系统可以定义为一个状态空间 $\mathcal{X}$ 上的一组微分方程：
+    \begin{equation}\label{eq:dynamic_system}
+        \begin{aligned}
+            \frac{d\mathbf{x}}{dt} & = \mathbf{f}(\mathbf{x}, t), \quad \mathbf{x} \in \mathcal{X}, \ t \in [0, T]
+        \end{aligned}
+    \end{equation}
+    其中 $\mathbf{x}$ 是状态向量，$\mathbf{f}(\mathbf{x}, t)$ 是系统的动力学方程，$T$ 是观测时间的结束点。
 \end{defn}
 
 \begin{defn}[混沌]
@@ -20,30 +22,218 @@
 
 当出现混沌时，一个看似简单的确定性系统可能会表现出极不稳定的动力学行为，这种情况下我们很难进行预测，并且微小的误差可能导致结果有很大的不同，因此在使用动力系统模型进行预测时，我们需要特别注意混沌现象的出现。混沌现象的出现同时跟选择的模型以及参数范围有关。
 
+另外，对于动力系统，当$\mathbf{f}$满足一些条件时，对于对应的初值问题有唯一解，有一个定理可以保证这一点。
+
+\begin{thm}[Picard-Lindelöf定理]\label{thm:picard_lindelof}
+    对于\ref{eq:dynamic_system}中状态空间为$\mathcal{X}=\mathbb{R}\times\mathbb{R}^n$，设 \( I \) 是一个闭区间，对于初值$(t_0,\mathbf{x_0})\in \textbf{int} I\times\mathbb{R}^n$，其中$\textbf{int} I\times\mathbb{R}^n$表示$I\times\mathbb{R}^n$中的内点，如果 $\mathbf{f}$ 满足对$t$连续，对$\mathbf{x}$Lipschitz连续，则$\exists \epsilon>0$，使得在区间$[t_0-\epsilon,t_0+\epsilon]$上的初值问题有唯一解$\mathbf{x}(t)$。
+\end{thm}
+\begin{pf}
+    让$C_{a,b}=I_a(t_0)\times B_b(\mathbf{x_0})$，其中$I_a(t_0)$是以$t_0$为中心的长度为$a$的区间，$B_b(\mathbf{x_0})$是以$\mathbf{x_0}$为中心的半径为$b$的球。显然$C_{a,b}$是一个紧集，令
+    \begin{equation}
+        M=\sup_{C_{a,b}}\Vert \mathbf{f}(\mathbf{x},t)\Vert，
+    \end{equation}
+    并令$L$为$\mathbf{f}$对于$\mathbf{x}$的Lipschitz常数，对于函数空间$\mathcal{C}(I_a(t_0),\mathbf{x_0})$，其中$\mathcal{C}(A,B)$表示所有定义域为$A$，值域为$B$的连续函数，其度量为由无穷范数
+    \begin{equation*}
+        \Vert\phi\Vert_{\infty}=\sup_{t\in I_a}\Vert\phi(t)\Vert_2。
+    \end{equation*}
+    诱导的，定义皮卡(Picard)算子：
+    \begin{equation*}
+        \Gamma:\mathcal{C}(I_a(t_0),\mathbf{x_0})\to \mathcal{C}(I_a(t_0),\mathbf{x_0})\\
+        \Gamma(\phi(t))=\mathbf{x_0}+\int_{t_0}^t\mathbf{f}(\phi(s),s)ds
+    \end{equation*}
+    我们接下来证明这个算子将一个完备度量空间映射到它自己并且是一个压缩映射，对于$\forall \phi\in\mathcal{C}(I_a(t_0),\mathbf{x_0})$，和常函数$c_{\mathbf{x_0}}(I_a)=\mathbf{x_0}$
+    \begin{equation*}
+        \Vert \Gamma(\phi)-c_{\mathbf{x_0}}\Vert_{\infty}=\Vert\int_{t_0}^t\mathbf{f}(\phi(s),s)ds\Vert_{\infty}\leq \int_{t_0}^{t'}Mds =M|t'-t_0|\leq Ma
+    \end{equation*}
+    其中$t'$为$\phi(t)$取最大值的点，由于$a$越小，$C_{a,b}$越小，$M$越小，因此取$a^*\leq \frac{b}{M}$，$a=a^*$有
+    \begin{equation*}
+        \Vert \Gamma(\phi)-c_{\mathbf{x_0}}\Vert_{\infty}\leq b
+    \end{equation*}
+    即$\Gamma(\phi)\in\mathcal{C}(I_a(t_0),\mathbf{x_0})$，接下来我们只需证$\Gamma$是一个压缩映射。
+    \begin{equation*}
+        \begin{aligned}
+            \Vert\Gamma(\phi_1)-\Gamma(\phi_2)\Vert_{\infty} &=\Vert \int_{t_0}^t\mathbf{f}(\phi_1(s),s)-\mathbf{f}(\phi_2(s),s)ds\Vert_{\infty}\\
+            &\leq\int_{t_0}^t\Vert\mathbf{f}(\phi_1(s),s)-\mathbf{f}(\phi_2(s),s)\Vert_2 ds\\
+            &\leq L\int_{t_0}^t\Vert \phi_1(s)-\phi_2(s)\Vert_2 ds\\
+            &\leq L\int_{t_0}^t\Vert \phi_1-\phi_2\Vert_{\infty} ds\\
+            &\leq La\Vert \phi_1-\phi_2\Vert_{\infty}
+        \end{aligned}
+    \end{equation*}
+    当$La<1$时，由定义\ref{def:comp_map}可得$\Gamma$为压缩映射，取$a<\frac{1}{L}$，由定理\ref{thm:banach}，存在唯一的$\mathbf{x}(t)\in \mathcal{C}(I_a(t_0),\mathbf{x_0})$，$\Gamma(\mathbf{x})=\mathbf{x}$，$\mathbf{x}$为初值问题的唯一解，$a<\min\{\frac{1}{L},\frac{b}{M}\}$
+    详细证明可以参考文献\cite{murray2013existence}。
+\end{pf}
+\begin{rem}\label{rem:P-L}
+    对于每个初始条件 $(t_0, \mathbf{x_0})$ 都存在一个唯一的最大（可能无限）开区间
+$$I_{\text{max}} = (t_{-}, t_{+}), \quad t_{\pm} \in \mathbb{R} \cup \{\pm \infty\}, \quad t_0 \in I_{\text{max}}$$
+这样任何满足这个初始条件的解都是满足 $I_{\text{max}}$这个初始条件的解的限制。
+
+在这种情况下 $t_{\pm} \neq \pm \infty$，只有两种可能：
+\begin{enumerate}
+    \item $$\limsup_{t \to t_{\pm}} \|\mathbf{x}(t)\| \to \infty$$
+    \item $$\lim_{t \to t_{\pm}} \mathbf{x}(t) \in \partial \bar{\Omega}$$
+\end{enumerate}
+其中 $\Omega$ 是 $\mathbf{f}$ 的定义域，并且 $\partial \bar{\Omega}$ 是它的边界。
+\end{rem}
+\begin{pf}
+    证明思路为\begin{enumerate}
+        \item 解的唯一性：假设有两个不同的最大解，那么由Picard-Lindelöf定理可以证明其重叠部分的值相同，将两者不同的部分分别延伸在重叠部分上，则会得到一个更“大”的解（只需验证它满足微分方程），矛盾。因此解唯一
+        \item 解的存在性：证明需要用到佐恩引理，构造所有解的并集。
+    \end{enumerate}
+\end{pf}
 \begin{defn}[不动点]
     在动力系统模型中，如果存在一个状态 $\mathbf{x}^*$，使得 $\mathbf{f}(\mathbf{x}^*, t) = 0$，那么我们称这个状态为不动点。
 \end{defn}
+\section{二维动力系统}
+\subsection{二维线性动力系统}
+\begin{defn}[二维线性动力系统]
+    一个二维线性动力系统可以定义为一个状态空间 $\mathcal{X}$ 上的一组线性微分方程：
+    \begin{equation}
+        \begin{aligned}
+            \dot{x} & = a x + b y, \\
+            \dot{y} & = c x + d y,
+        \end{aligned}
+    \end{equation}
+    其中a、b、c、d为参数。
+\end{defn}
+若用矩阵形式表示，可以令
+\begin{equation}
+    \mathbf{A}= \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix},\mathbf{x}=\begin{pmatrix}
+        x \\y
+    \end{pmatrix}
+\end{equation}
+该系统写为
+\begin{equation}
+    \dot{\mathbf{x}}=\mathbf{A}\mathbf{x}
+\end{equation}
+由于任意两个解$\mathbf{x_1},\mathbf{x_2}$的线性组合$c_1\mathbf{x_1}+c_2\mathbf{x_2}$也是这个系统的解，因此称这类系统为线性的。注意到当$\mathbf{x^*}=\mathbf{0}$时，$\dot{\mathbf{x}}=\mathbf{0}$，因此$\mathbf{0}$是线性动力系统的一个不动点。
+\begin{defn}[闭轨]
+    在数学和力学领域，闭轨（closed orbit）是指一个在给定的动力系统中，系统状态在相位空间（phase space）中的一条轨迹，最终又回到起始状态并重复自身。换句话说，闭轨是一条闭合的轨迹，起始点与终点相同。
+\end{defn}
+闭轨的主要特征包括：
+\begin{itemize}
+    \item \textbf{周期性}：轨迹是周期性的，即系统的状态在一定时间周期后会回到初始状态。
+    \item \textbf{封闭性}：轨迹形成一个闭合的环路，没有开口。
+    \item \textbf{稳定性}：在动力系统中，闭轨通常与稳定点、周期轨道或混沌行为相关联。如果一个轨迹在小扰动后依然保持稳定，它可能是一个稳定的闭轨。
+\end{itemize}
+\subsection{不动点分类}
+我们引入一些不动点的稳定性术语
+\begin{defn}[全局稳定（Global Stable）]
+    一个系统在其所有初始条件下都会收敛到一个稳定的不动点。 
+\end{defn}
+\begin{defn}[李雅普诺夫稳定（Lyapunov Stable）]
+    在不动点$\mathbf{x^*}$附近存在一个邻域，对于任意$\epsilon>0$，存在$\delta>0$，使得对于任意初始状态$\mathbf{x_0}$，只要$\Vert \mathbf{x_0}-\mathbf{x^*}\Vert<\delta$，则有$\Vert \mathbf{x_0(t)}-\mathbf{x^*}\Vert<\epsilon$，其中$\mathbf{x_0(t)}$是系统在初始状态$\mathbf{x_0}$下的运动轨迹。
+\end{defn}
+\begin{defn}[中性稳定（Neutral Stable）]
+    一个不动点是李雅普诺夫稳定的，但不是全局稳定的，则称该不动点是中性稳定的。
+\end{defn}
+\begin{defn}[渐近稳定（Asymptotic Stable）]
+    一个不动点既是全局稳定又是李雅普诺夫稳定的，则称该不动点为渐近稳定的。
+\end{defn}
+\begin{defn}[不稳定（Instability）]
+    一个不动点既不是全局稳定也不是李雅普诺夫稳定的，则称该不动点为不稳定的。
+\end{defn}
 
+全局稳定系统：$\frac{dx}{dt}=-x,\frac{dy}{dt}=-y$， 不动点在 $(0, 0)$，是吸引子
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/fix5.png}
+    \caption{全局稳定系统}
+    \label{fig:global_stable}
+\end{figure}
+中性稳定系统：$\frac{dx}{dt}=-y,\frac{dy}{dt}=x$， 不动点在 $(0, 0)$，是中性稳定
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/fix4.png}
+    \caption{中性稳定系统}
+    \label{fig:neutral_stable}
+\end{figure}
+不稳定系统：$\frac{dx}{dt}=x-y,\frac{dy}{dt}=x+y$， 不动点在 $(0, 0)$，是排斥子
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/fix2.png}
+    \caption{不稳定系统}
+    \label{fig:unstable}
+\end{figure}
+渐近稳定系统：$\frac{dx}{dt}=-x-y,\frac{dy}{dt}=x-y$， 不动点在 $(0, 0)$，是吸引子
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/fix3.png}
+    \caption{渐近稳定系统}
+    \label{fig:asymptotic_stable}
+\end{figure}
+一个不动点可以是吸引子，但不是李雅普诺夫稳定的，例如在圆向量场上的：$\frac{d\theta}{dt}=1-\cos\theta$，不动点在$\theta=0$，是吸引子，但不是李雅普诺夫稳定的。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/fix1.png}
+    \caption{吸引子但不是李雅普诺夫稳定的系统}
+    \label{fig:attractor}
+\end{figure}
+\subsection{判断不动点分类方法}
+对于一个二维线性动力系统，我们可以通过计算矩阵的特征值来判断不动点的稳定性。设$\mathbf{A}$是系统的矩阵，$\lambda_1,\lambda_2$是$\mathbf{A}$的特征值，$\mathbf{v}_1,\mathbf{v}_2$是对应的特征向量。可以发现
+\begin{equation}
+    \mathbf{x}(t)=c_1e^{\lambda_1t}\mathbf{v}_1+c_2e^{\lambda_2t}\mathbf{v}_2
+\end{equation}
+因此我们可以发现只要知道了矩阵的特征值就可以判断轨迹的性质。对于二维线性动力系统，我们可以通过计算矩阵的迹和行列式来判断不动点的性质。由定理\ref{thm:trace_det}，我们可以得到
+\begin{equation}
+    \lambda_{1,2}=\frac{1}{2}\left(\text{tr}(\mathbf{A})\pm \sqrt{\text{tr}(\mathbf{A})^2-4\det(\mathbf{A})}\right),\quad \text{tr}(\mathbf{A})=\lambda_1+\lambda_2,\det(\mathbf{A})=\lambda_1\lambda_2
+\end{equation}
+对于实系数二维线性动力系统，
+
+若$\det(\mathbf{A})<0$，特征值均为实数且符号相反，称不动点为鞍点(saddle)。如图\ref{fig:saddle}，鞍点是一个不稳定的不动点，它的一个方向是稳定的，另一个方向是不稳定的。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/saddle.png}
+    \caption{鞍点}
+    \label{fig:saddle}
+\end{figure}
+
+如图\ref{fig:node}，若$\det(\mathbf{A})>0$，当$\text{tr}(\mathbf{A})^2-4\det(\mathbf{A})>0$时，特征值均为实数且同号，称不动点为结点(node)，当$\text{tr}(\mathbf{A})>0$时，称为不稳定结点，当$\text{tr}(\mathbf{A})<0$时，称为稳定结点。当$\text{tr}(\mathbf{A})^2-4\det(\mathbf{A})<0$时，特征值为共轭复数，称不动点为焦点(focus)，当$\text{tr}(\mathbf{A})>0$时，称为不稳定焦点，当$\text{tr}(\mathbf{A})<0$时，称为稳定焦点。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{Img/node.png}
+    \caption{结点与焦点}
+    \label{fig:node}
+\end{figure}
+
+如图\ref{fig:star}，若$\det(\mathbf{A})>0$，当$\text{tr}(\mathbf{A})=0$时，称不动点为中心(center)，中心是一个稳定的不动点。还有一些特殊情况，这些特殊情况都发生在$\text{tr}(\mathbf{A})^2-4\det(\mathbf{A})=0$时，当$\mathbf{A}$特征值相同且有两个线性无关的特征向量时，称不动点为星形结点(star node)。当$\mathbf{A}$特征值相同且只有一个线性无关的特征向量时，称不动点为退化结点(degenerate node)。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\linewidth]{Img/star.png}
+    \caption{星形结点与退化结点与中心}
+    \label{fig:star}
+\end{figure}
+
+若$\det(\mathbf{A})=0$，特征值有一个为零，称不动点为非孤立不动点，此时或者如图\ref{fig:nonisolate}，一条直线都是不动点，或者$\mathbf{A}=\mathbf{0}$，一个平面都是不动点。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Img/nonisolate.png}
+    \caption{非孤立不动点}
+    \label{fig:nonisolate}
+\end{figure}
+\subsection{二维非线性动力系统}
 由于在非线性系统中研究不动点的性质往往比较困难，因此我们通常会考虑一些线性化方法来研究不动点的特性。
 
 考虑系统
 \begin{equation}
     \begin{aligned}
-        \dot{x}=f(x,y)\\
+        \dot{x}=f(x,y) \\
         \dot{y}=g(x,y)
     \end{aligned}
 \end{equation}
 假定$(x^*,y^*)$为该系统的一个不动点，通过泰勒展开我们可以得到
 \begin{equation}\label{0}
     \begin{pmatrix}
-        \dot{u}\\
+        \dot{u} \\
         \dot{v}
     \end{pmatrix}=
     \begin{pmatrix}
-        \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y}\\
+        \frac{\partial f}{\partial x} & \frac{\partial f}{\partial y} \\
         \frac{\partial g}{\partial x} & \frac{\partial g}{\partial y}
     \end{pmatrix}_{(x^*,y^*)}\begin{pmatrix}
-        u\\ v
+        u \\ v
     \end{pmatrix}+\text{二次项}
 \end{equation}
 其中$(u,v)$为$(x^*,y^*)$处的微小扰动，我们将(\ref{0})中去除二次项的部分称为线性化的系统。
@@ -55,11 +245,10 @@
 \begin{defn}[吸引子]
     在动力系统中，如果某一状态或状态集合的邻域内的所有轨迹最终都趋近于该状态或状态集合，则该状态或状态集合称为吸引子。
 \end{defn}
-    
+
 \begin{defn}[极限环]
     极限环是一个孤立的闭轨迹， 孤立意味着它附近的轨迹不是闭的，它们盘旋着靠近或原理极限环。如果当时间$t\to +\infty$ 时，所有的邻近轨迹都趋近于极限环，那么所在的流形被称为稳定的，或者称极限环是稳定的（吸引的）。反之，如果$t\to +\infty$ 时，所有的邻近轨迹都远离于极限环，那么称流形是不稳定的或者极限环是不稳定的（非吸引的）。在所有其它情况下，流形既不是稳定也不是不稳定的，或者称极限环是半稳定的。
 \end{defn}
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{Img/limit_cycle.png}
@@ -70,19 +259,6 @@
 如图\ref{fig:limit_cycle}，极限环分为三种稳定极限环，不稳定极限环和半稳定极限环。稳定极限环是一个吸引子，不稳定极限环是一个排斥子。
 
 稳定极限环模拟了具有自发维持的振荡系统， 如果系统有轻微的扰动，它会自动恢复到标准周期。
-
-\begin{thm}[庞加莱-本迪克松(Poincaré-Bendixson)定理]
-    假设：
-    \begin{enumerate}
-        \item $R$是平面上一个有界闭集；
-        \item 有一个定义在包含$R$的开集上的二维动力系统 $\frac{dx}{dt} = f(x, y)$，$\frac{dy}{dt} = g(x, y)$，其中 $f(x, y)$ 和 $g(x, y)$ 是关于状态变量 $x$ 和 $y$ 的实值连续可微函数；
-        \item $R$不包含任何不动点；
-        \item 存在一个开始于$R$并永远在$R$内运动的轨迹$C$；
-    \end{enumerate}
-    那么，$R$内的轨迹$C$要么是一个闭轨道，要么当$t \to \infty$时它盘旋靠近一条闭轨道。
-\end{thm}
-
-关于证明细节，可以参考Perko(1991)、Coddington和Levinson(1995)的著作，庞加莱-本迪克松定理表明，混沌永远不会在相平面中产生\cite{strogatz2018nonlinear}。
 
 \begin{thm}[Dulac准则]
     令$\frac{d\mathbf{x}}{dt}=\mathbf{f}(\mathbf{x})$是一个定义在平面$R$上一个单连通子集的一个连续可微向量场。如果存在一个定义在相应区域上的实值连续可微函数$g(x, y)$，使得$\nabla \cdot (g \frac{d\mathbf{x}}{dt})$不变号，那么$R$上无闭轨。
@@ -95,150 +271,81 @@
     显然左边不等于0， 而右边等于0，这与假设矛盾，所以$R$上无闭轨。
 \end{pf}
 
-\section{血糖预测中动力系统模型的发展}
-\subsection{葡萄糖动力系统}
-在后吸收状态下，葡萄糖由肝脏和肾脏释放到血液中，被体内所有细胞从间质液中移除，并分布到许多生理组分中（例如，动脉血、静脉血、脑脊液、间质液）。我们可以通过以下微分方程来描述葡萄糖动力系统\cite{bergman1979quantitative}：
-
-\begin{equation}\label{1}
-    \frac{dG}{dt} = \text{Production} - \text{Uptake},
+\subsection{庞加莱-本迪克松定理}
+考虑二维动力系统
+\begin{equation}\label{eq:2d_system}
+    \frac{d\mathbf{x}}{dt}=\mathbf{f}(\mathbf{x})
 \end{equation}
-其中$G$是血液中的葡萄糖浓度，$t$是时间，Production是葡萄糖生成速率，Uptake是葡萄糖摄取速率(也可以理解为血液中葡萄糖的消耗速率)。
-
-葡萄糖产生和摄取的速率主要取决于血糖和胰岛素水平。这些关系已经通过葡萄糖夹持技术进行了实验定义，该技术允许在各种稳态血糖和胰岛素水平下测量葡萄糖产生和摄取速率\cite{bergman1985assessment}。在恒定胰岛素水平下，葡萄糖产生减少而摄取增加，两者都与血糖水平线性相关\cite{best1981glucose}。这些线性依赖的斜率是“葡萄糖效力”的参数。因此，我们可以将葡萄糖产生和摄取速率表示为：
-
-\begin{equation}\label{2}
-    \text{Production} = P_0 -(E_{G0P} + S_{IP} \times I) \times G,
-\end{equation}
-\begin{equation}\label{3}
-    \text{Uptake} = U_0 + (E_{G0U} + S_{IU} \times I) \times G,
-\end{equation}
-
-其中$P_0$和$U_0$是零葡萄糖时的葡萄糖产生和摄取速率，\(E_{G0P}\)和\(E_{G0U}\)分别是产生和摄取的零胰岛素葡萄糖效力，\(S_{IP}\)和\(S_{IU}\)分别是产生和摄取的胰岛素敏感性，$I$代表血胰岛素浓度。将方程(\ref{2})和(\ref{3})代入方程(\ref{1})，我们得到
-
-\begin{equation}
-    \frac{dG}{dt} = R_0 -(E_{G0} + S_I \times I) \times G,
-\end{equation}
-其中$R_0$($=P_0-U_0$)是零葡萄糖时葡萄糖的净产生速率，\(E_{G0}\)($=E_{G0p}+E_{G0U}$)是零胰岛素时的总葡萄糖效力，\(S_I\)($=S_{IP}-S_{IU}$)是总胰岛素敏感性\cite{topp2000model}。
-
-再考虑体内的肝糖原水解产生的葡萄糖，最终可以得到
-\begin{equation}
-    \frac{dG}{dt} = R_0 -(E_{G0} + S_I \times I) \times G+\frac{K_0}{K_1+I^p},
-\end{equation}
-其中$K_0,K_1,p$为与肝糖原分解产生葡萄糖相关的常数\cite{bridgewater2020amplitude}。
-\subsection{胰岛素动力系统}
-胰岛素由胰$\beta$细胞分泌，被肝脏、肾脏和胰岛素受体清除，并分布到几个组分中（例如，门静脉、外周血和间质液）。我们可以通过以下微分方程来描述胰岛素动力系统：
-
-\begin{equation}\label{4}
-\frac{dI}{dt} = \text{Secretion} - \text{Clearance},
-\end{equation}
-其中Secretion表示胰岛素分泌速率，Clearance表示胰岛素清楚速率。
-
-我们假设胰岛素清除速率为\(kI\)，其中$k$是代表肝脏、肾脏和胰岛素受体中胰岛素摄取的清除常数。
-
-当系统处于近稳态时，胰岛素清除速率与血液胰岛素水平成正比。我们假设胰岛素分泌速率模拟为葡萄糖水平的S形函数\cite{topp2000model}。因此，我们假设
-
-\begin{equation}\label{5}
-\text{Secretion} = \frac{\beta\sigma G^2}{(\alpha + G^2)},
-\end{equation}
-
-其中$\beta$是胰$\beta$细胞的质量。所有$\beta$细胞被假定以相同的最大速率$\sigma$分泌胰岛素，\(G^2/(\alpha + G^2)\)是一个带有系数$2$的Hill函数，描述了从$0$到$1$的S形范围，在$G=\alpha^{\frac{1}{2}}$时达到其最大值的一半。将方程(\ref{5})代入方程(\ref{4})，我们得到控制胰岛素动力学的方程：
-
-\begin{equation}
-    \frac{dI}{dt} = \frac{\beta\sigma G^2}{(\alpha + G^2)} - kI.
-\end{equation}
-
-\subsection{胰\(\beta\)细胞动力系统}
-尽管胰$\beta$细胞在胰腺中分布复杂，但$\beta$细胞质量动态可以用单一组分模型定量化,新的$\beta$细胞可以通过现有$\beta$细胞的复制、新生（干细胞的复制和分化）和其他细胞的转分化来形成。目前，无法量化新生和转分化的速率。然而，除了在发育期间和在极端生理或化学诱导创伤反应中，这些可以忽略不计\cite{finegood1995dynamics}。基于这些原因，新生和转分化未纳入当前模型，且生成的$\beta$细胞被假定等于所有复制的$\beta$细胞。
-
-我们可以通过以下微分方程来描述胰$\beta$细胞动力系统：
-\begin{equation}
-    \frac{d\beta}{dt} = (-d_0+r_1G-r_2G^2)\beta,
-\end{equation}
-其中$d_0$是零血糖时$\beta$细胞的自然死亡率，$r_1$和$r_2$是两个常系数\cite{topp2000model}。
-\section{模型分析}
-
-由于胰$\beta$细胞数量变化较慢(一般以天为单位观测)，在实时血糖监测的过程中，我们以每次进食为数据分段标准，因此我们可以考虑将$\beta$细胞视为常量，仅考虑葡萄糖-胰岛素动力系统\cite{huard2022mathematical}。我们可以得到如下动力系统模型：
-\begin{equation}\label{11}
-    \begin{aligned}
-        \dot{G} &= a_0-a_1G-a_2GI+\frac{a_3}{a_4+I^p} \\
-        \dot{I} &= \frac{b_1 G^2}{G^2 + b_2^2} - b_3 I
-    \end{aligned}
-\end{equation}
-\begin{prop}
-    动力系统(\ref{11})有唯一不动点，且该不动点为吸引子
-\end{prop}
-
+$\mathbf{f}$Lipschitz连续
+\begin{defn}[流]
+    对于初值$(0,\mathbf{x_0})$，由\ref{rem:P-L}，令$\mathbf{x}(t)$是方程(\ref{eq:2d_system})的唯一最大解，称$\Phi_t(\mathbf{x_0})=\mathbf{x}(t)$为流。
+\end{defn}
+\begin{rem}
+    由定理\ref{thm:picard_lindelof}，对$\forall \mathbf{x_0}$，存在$\epsilon>0$满足$\Phi_t(\mathbf{x_0})$在$t\in (-\epsilon,\epsilon)$上是良定义的，事实上$\Phi_t:\mathbb{R}^2\to\mathbb{R}^2$在$\Phi_t$可定义时是Lipschitz连续的。
+\end{rem}
 \begin{pf}
-    为寻找该动力系统不动点，我们考查
-\begin{equation}
-    a_0-a_1G^*-a_2G^*I^*+\frac{a_3}{a_4+(I^*)^p}= \frac{b_1 (G^*)^2}{(G^*)^2 + b_2^2} - b_3 I^*=0
-\end{equation}
-可以注意到$G^*$越大，$I^*$越大，令
-\begin{equation}
-    h(G)=a_0-a_1G-a_2G\frac{b_1G^2}{b_3(G^2+b_2^2)}+\frac{a_3(b_3^p(G^2+b_2^2)^p)}{a_4(b_3^p(G^2+b_2^2)^p+b_1^pG^{2p})}
-\end{equation}
-可以得出$h(G)$单调递减，且$h(0)>0,\lim_{G\to\infty}h(G)<0$，易得$\exists !G^*$使得$h(G^*)=0$因此，动力系统(\ref{11})有唯一不动点。
-
-在点$(G^*,I^*)$处线性化动力系统(\ref{11})可得 
-\begin{equation}\label{14}
-    \begin{pmatrix}
-        \dot{G}\\
-        \dot{I}
-    \end{pmatrix}=\begin{pmatrix}
-        -a_1-a_2I^* & -a_2G^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2}\\
-        \frac{2b_1b_2^2G^*}{((G^*)^2 + b_2^2)^2} & -b_3
-    \end{pmatrix}\begin{pmatrix}
-        G\\
-        I
-    \end{pmatrix}
-\end{equation}
-线性动力系统(\ref{14})的特征多项式为$\lambda^2+c_1\lambda+c_2$，其中
-\begin{equation*}
-    c_1=a_1+a_2I^*+b_3>0, c_2=(a_1+a_2I^*)b_3+\frac{2b_1b_2^2G^*}{((G^*)^2 + b_2^2)^2}(a_2G^*+\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2})>0
-\end{equation*}
-两个特征值均有负实部，唯一不动点$(G^*,I^*)$为吸引子\cite{strogatz2018nonlinear}。
-
+    由于$\mathbf{f}$是连续可微的，$\forall \mathbf{x_1},\mathbf{x_2}\in \mathbb{R}^2$，
 \end{pf}
-\begin{prop}\label{prop2}
-    动力系统(\ref{11})全局渐近稳定(即有稳定极限环)
-\end{prop}
-\begin{pf}
-    考虑$g(G,I)=\frac{1}{I}$， 我们有
+\begin{defn}[$\omega$-极限集]
+    对于一个初值$\mathbf{x_0}$满足对所有$t\geq 0$，$\Phi_t(\mathbf{x_0})$都是良定义的，定义$\omega$-极限集$\Omega$为
     \begin{equation}
-        \nabla\cdot(g(\dot{G},\dot{I}))=\frac{-a_1}{I}-a_2-\frac{b_1 G^2}{I^2(G^2 + b_2^2)}<0
-    \end{equation}
-    由Dulac准则，(\ref{11})在$(0,+\infty)\times (0,+\infty)$中无闭轨，由于葡萄糖和胰岛素的值恒大于$0$， 由庞加莱-本迪克松定理知(\ref{11})有稳定极限环，该极限环为唯一不动点$(G^*,I^*)$
-\end{pf}
-
-\section{模型参数估计方法}
-在实际应用中，我们需要根据实验数据估计模型参数。在估计模型参数时，我们通常使用最小二乘法来拟合模型。最小二乘法是一种常用的参数估计方法，它通过最小化实际观测值和模型预测值之间的残差平方和来估计模型参数。
-
-\begin{defn}[最小二乘法]
-    给定一组实验数据$(x_i, y_i)$，我们的目标是找到一组参数$\theta$，使得模型预测值$f(x_i, \theta)$与实际观测值$y_i$之间的残差平方和最小。最小二乘法的目标函数为：
-    \begin{equation}
-        \theta^* = \arg\min_{\theta} \sum_{i=1}^{n} (y_i - f(x_i, \theta))^2
+        \Omega=\{\mathbf{y}\in \mathbb{R}^2|\exists t_n\to +\infty,\Phi_{t_n}(\mathbf{x_0})\to \mathbf{y}\}
     \end{equation}
 \end{defn}
+\begin{prop}
+    令$\Omega$是流$\Phi_t$的$\omega$-极限集，那么：
+    \begin{enumerate}
+        \item $\Omega$是闭集；
+        \item 若$\mathbf{x}\in \Omega$，那么$\Phi_t(\mathbf{x})\in \Omega$；
+        \item 若$\Omega$是有界的，则它也是是连通的；
+    \end{enumerate}
+\end{prop}
+\begin{pf}
+    \begin{enumerate}
+        \item 由定义可得，$\Omega$可写为
+        \begin{equation*}
+            \Omega=\cap_{r\geq 0}\overline{\mathbf{x}(t):t\geq r}
+        \end{equation*}
+        闭集的交集仍为闭集，因此$\Omega$是闭集。
+        \item 由于系统\ref{eq:2d_system}不显含变量$t$，我们以$\mathbf{x}(t,t_0,x_0)$表示初值问题$(t_0,\mathbf{x_0})$的解，初值问题
+        \begin{equation}\label{eq:initial_problem_1}
+            \begin{aligned}
+                \frac{d\mathbf{x}}{dt} & =\mathbf{f}(\mathbf{x}) \\
+                \mathbf{x}(0) & =\mathbf{x}(t,t_2,x_0)
+            \end{aligned}
+        \end{equation}
+        等价于初值问题
+        \begin{equation}\label{eq:initial_problem_2}
+            \begin{aligned}
+                \frac{d\mathbf{x}}{dt} & =\mathbf{f}(\mathbf{x}) \\
+                \mathbf{x}(t_2) & =\mathbf{x}(t,t_2,x_0)
+            \end{aligned}
+        \end{equation}
+        初值问题\ref{eq:initial_problem_1}上的流为$\Phi_{t_1}(\phi_{t_2}(\mathbf{x_0}))$而初值问题\ref{eq:initial_problem_2}上的流为$\phi_{t_1+t_2}(\mathbf{x_0})$，因此$\Phi_{t_1}(\phi_{t_2}(\mathbf{x_0}))=\phi_{t_1+t_2}(\mathbf{x_0})$，即$\Phi_{t_1}\circ\Phi_{t_2}=\Phi_{t_1+t_2}$。
 
-在实际应用中，我们通常使用数值优化算法来求解最小二乘问题。常用的数值优化算法包括梯度下降法、共轭梯度法、牛顿法等。这些算法可以有效地求解高维非线性最小二乘问题，帮助我们估计模型参数。
+        对于$\mathbf{x}\in\Omega$，$\exists t_n\to +\infty$，$\lim_{n\to\infty}\Phi_{t_n}(\mathbf{x_0})=\mathbf{x}$，因此
+        \begin{equation*}
+            \Phi_t(\mathbf{x})=\Phi_{t}(\lim_{n\to\infty}\Phi_{t_n}(\mathbf{x_0}))=\lim_{n\to\infty}\Phi_{t+t_n}(\mathbf{x_0})=\mathbf{x}\in \Omega。
+        \end{equation*}
+        \item 由于$\Omega$是闭集，且$\Omega$是有界的，因此$\Omega$是紧集，由第二条性质且$\Phi_t$是连续的知$\Omega$是连通的。
+    \end{enumerate}
+\end{pf}
+\begin{exmp}[$\omega$-极限集]
+    \begin{enumerate}
+        \item 若$\mathbf{x_0}$是一个不动点，显然其对应的流的$\omega$-极限集为$\mathbf{x_0}$。
+        \item 若 $\mathbf{x}$ 是一个平衡点，$\mathbf{x_0}$ 是一个满足 $\lim_{t\to\infty}\Phi_t(\mathbf{x_0}) = \mathbf{x}$ 的初始条件，那么 $\mathbf{x}$ 是 $\Phi_t(\mathbf{x_0})$的$\omega$-极限集。
+        \item 若$\Phi_t(\mathbf{x_0})$是一个周期轨道，那么$\Phi_t(\mathbf{x_0})$的$\omega$-极限集是这个周期轨道。
+    \end{enumerate}
+\end{exmp}
+\begin{thm}[庞加莱-本迪克松(Poincaré-Bendixson)定理]
+    对于系统\ref{eq:2d_system}，如果$\Omega$是一个有界非空的$\omega$-极限集，那么要么$\Omega$中含有至少一个不动点，要么$\Omega$是一个闭轨。
+\end{thm}
+\subsubsection{横截线(Transversal line)} 
+\begin{defn}[横截线]
+    对于二维动力系统\ref{eq:2d_system}，横截线是指一条线段$S=\{\lambda\mathbf{x_0}+(1-\lambda)\mathbf{x_1},0\leq \lambda\leq 1\}$，对于$\forall \mathbf{x}\in S$， $\mathbf{f}(\mathbf{x})$不会消失且不平行于$S$。
+\end{defn}
+\begin{lem}
+    
+\end{lem}
 
-我们先将动力系统模型(\ref{11})转化为差分方程形式，然后根据实验数据使用最小二乘法估计模型参数。具体步骤如下：
-
-\begin{enumerate}
-    \item 将动力系统模型(\ref{11})转化为差分方程形式：
-    \begin{equation}
-        \begin{aligned}
-            G_{t+1} &= G_{t-1} + 2\Delta t \left(a_0-a_1G_t-a_2G_tI_t+\frac{a_3}{a_4+I_t^p}\right) \\
-            I_{t+1} &= I_{t-1} + 2\Delta t \left(\frac{b_1 G_t^2}{G_t^2 + b_2^2} - b_3 I_t\right)
-        \end{aligned}
-    \end{equation}
-    \item 以每次进食为一个阶段将同一个人的数据分为$(G_{ij}, t_{ij})$，其中$j$表示第j阶段进食，通过差分方程算出来的葡萄糖数值为$f(\theta)$,定义损失函数：
-    \begin{equation}
-        L(\theta) = \sum_{j=1}^{m} \Vert \mathbf{G_j}-f(\theta) \Vert_2^2+\epsilon\Vert \theta \Vert_2
-    \end{equation}
-    其中$\epsilon$是正则化参数，用于防止过拟合。
-    \item 由命题\ref{prop2}，我们可以保证模型参数估计的稳定性和收敛性。因此我们可以直接使用梯度下降法求解。
-    \begin{equation}
-        \theta^* = \arg\min_{\theta} L(\theta)
-    \end{equation}
-\end{enumerate}
+关于更多证明细节，可以参考\cite{coddington1956theory}。庞加莱-本迪克松定理表明，混沌永远不会在相平面中产生\cite{strogatz2018nonlinear}。
