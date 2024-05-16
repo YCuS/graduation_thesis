@@ -1,10 +1,22 @@
-\begin{thebibliography}{24}
+\begin{thebibliography}{27}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \providecommand{\href}[2]{\url{#2}}
 \providecommand{\doi}[1]{DOI: \href{http://dx.doi.org/#1}{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax\relax\else
   \urlstyle{same}\fi
+
+\bibitem[{Wikipedia contributors}(2024{\natexlab{a}})]{enwiki:1216667016}
+{Wikipedia contributors}.
+\newblock Dynamical system --- {Wikipedia}{,} the free
+  encyclopedia\allowbreak[Z].
+\newblock [S.l.: s.n.], 2024{\natexlab{a}}.
+
+\bibitem[{Wikipedia contributors}(2024{\natexlab{b}})]{enwiki:1223508209}
+{Wikipedia contributors}.
+\newblock Arnold's cat map --- {Wikipedia}{,} the free
+  encyclopedia\allowbreak[Z].
+\newblock [S.l.: s.n.], 2024{\natexlab{b}}.
 
 \bibitem[Hargrove(1998)]{hargrove1998dynamic}
 HARGROVE J~L.
@@ -85,6 +97,20 @@ MURRAY F~J, MILLER K~S.
 \newblock Existence theorems for ordinary differential equations\allowbreak[M].
 \newblock [S.l.]: Courier Corporation, 2013: 50.
 
+\bibitem[{Wikipedia contributors}(2024{\natexlab{c}})]{enwiki:1216903952}
+{Wikipedia contributors}.
+\newblock Bifurcation theory --- {Wikipedia}{,} the free
+  encyclopedia\allowbreak[EB/OL].
+\newblock 2024.
+\newblock
+  \url{https://en.wikipedia.org/w/index.php?title=Bifurcation_theory&oldid=1216903952}.
+
+\bibitem[Strogatz(2018)]{strogatz2018nonlinear}
+STROGATZ S~H.
+\newblock Nonlinear dynamics and chaos: with applications to physics, biology,
+  chemistry, and engineering\allowbreak[M].
+\newblock [S.l.]: CRC press, 2018.
+
 \bibitem[Andronov\ et~al.(1974)Andronov, Leontovich, Gordon, Maier, and
   Gutzwiller]{andronov1974qualitative}
 ANDRONOV A~A, LEONTOVICH E~A, GORDON I, et~al.
@@ -96,12 +122,6 @@ ANDRONOV A~A, LEONTOVICH E~A, GORDON I, et~al.
 CODDINGTON E~A, LEVINSON N, TEICHMANN T.
 \newblock Theory of ordinary differential equations\allowbreak[Z].
 \newblock [S.l.]: American Institute of Physics, 1956: 389--403.
-
-\bibitem[Strogatz(2018)]{strogatz2018nonlinear}
-STROGATZ S~H.
-\newblock Nonlinear dynamics and chaos: with applications to physics, biology,
-  chemistry, and engineering\allowbreak[M].
-\newblock [S.l.]: CRC press, 2018.
 
 \bibitem[Bergman\ et~al.(1979)Bergman, Ider, Bowden, and
   Cobelli]{bergman1979quantitative}

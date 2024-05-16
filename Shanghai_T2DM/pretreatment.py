@@ -1,6 +1,6 @@
 import pandas as pd
 
-def extract_vectors_from_xlsx(sheet_name='2010_0_20220111.xlsx'):
+def extract_vectors_from_xlsx(sheet_name='2001_1_20201117.xlsx'):
     # 读取xlsx文件
     df = pd.read_excel(sheet_name)
     
@@ -48,8 +48,8 @@ def save_vectors_to_file(vectors, output_file):
             f.write(vector_str + '\n')
 
 # 文件路径和工作表名称
-sheet_name = '2010_0_20220111.xlsx'  # 替换为工作表名称
-output_file = 'output_vectors_2.txt'  # 输出文件路径
+sheet_name = '2001_1_20201117.xlsx'  # 替换为工作表名称
+output_file = 'output_vectors.txt'  # 输出文件路径
 
 # 从 Excel 文件中提取向量
 result_vectors = extract_vectors_from_xlsx(sheet_name)

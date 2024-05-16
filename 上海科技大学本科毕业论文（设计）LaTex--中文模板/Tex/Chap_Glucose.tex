@@ -51,14 +51,176 @@
 \end{equation}
 
 \section{胰\(\beta\)细胞动力系统}
+不同的胰$\beta$细胞含量会影响血糖平衡点的位置，在其余参数相同的情况下
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/nullcline.png}
+    \caption{不同胰\(\beta\)细胞下动力系统模型不动点位置的变化}
+    \label{fig:nullcline}
+\end{figure}
+如图\ref{fig:nullcline}所示，当胰$\beta$细胞数量增加时，不动点位置会向右下方移动，即最后平衡时刻血糖含量较低，胰岛素含量较高。
+
+其相图如下图所示
+\begin{figure}[H]
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Img/phase_300.png}
+    \end{minipage}
+    \begin{minipage}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Img/phase_600.png}
+    \end{minipage}
+    \caption{不同胰\(\beta\)细胞下动力系统模型相图}
+    \label{fig:phase}
+\end{figure}
+
 尽管胰$\beta$细胞在胰腺中分布复杂，但$\beta$细胞质量动态可以用单一组分模型定量化,新的$\beta$细胞可以通过现有$\beta$细胞的复制、新生（干细胞的复制和分化）和其他细胞的转分化来形成。目前，无法量化新生和转分化的速率。然而，除了在发育期间和在极端生理或化学诱导创伤反应中，这些可以忽略不计\cite{finegood1995dynamics}。基于这些原因，新生和转分化未纳入当前模型，且生成的$\beta$细胞被假定等于所有复制的$\beta$细胞。
 
 我们可以通过以下微分方程来描述胰$\beta$细胞动力系统：
 \begin{equation}
     \frac{d\beta}{dt} = (-d_0+r_1G-r_2G^2)\beta,
 \end{equation}
+
 其中$d_0$是零血糖时$\beta$细胞的自然死亡率，$r_1$和$r_2$是两个常系数\cite{topp2000model}。
-\section{模型分析}
+
+在此动力系统模型下，我们可以得到胰$\beta$细胞数量与血糖浓度的变化规律。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/betarate.png}
+    \caption{胰$\beta$细胞生成率和死亡率与血糖浓度的变化规律}
+    \label{fig:beta}
+\end{figure}
+
+这时整个血糖-胰岛素-胰$\beta$细胞动力系统模型的相图如图\ref{fig:3dphase}所示。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/3dphase.png}
+    \caption{血糖-胰岛素-胰$\beta$细胞动力系统模型相图}
+    \label{fig:3dphase}
+\end{figure}
+
+考察胰$\beta$细胞-胰岛素-血糖浓度构成的动力系统
+\begin{equation}
+    \begin{aligned}
+        \dot{G}     & = a_0-a_1G-a_2GI+\frac{a_3}{a_4+I^p}       \\
+        \dot{I}     & = \frac{b_1\beta G^2}{G^2 + b_2^2} - b_3 I \\
+        \dot{\beta} & = (-d_0+r_1G-r_2G^2)\beta
+    \end{aligned}
+\end{equation}
+我们可以得到如下不动点方程组
+\begin{equation}\label{fixequation}
+    \begin{aligned}
+        a_0-a_1G^*-a_2G^*I^*+\frac{a_3}{a_4+{I^*}^p}     & =0 \\
+        \frac{b_1\beta {G^*}^2}{G^{*2} + b_2^2} - b_3I^* & =0 \\
+        (-d_0+r_1G^*-r_2{G^*}^2)\beta^*                  & =0
+    \end{aligned}
+\end{equation}
+对于
+\begin{equation}\label{G^*}
+    -d_0+r_1G^*-r_2{G^*}^2=0
+\end{equation}
+显然胰$\beta$细胞不会单调递增或递减，因此方程\ref{G^*}一定有两个正实数解，解出的$G^*$，将其带入方程组\ref{fixequation}的第一行我们可以得到对应的$I^*$，再通过第二行可解得对应的$\beta^*$，因此该动力系统模型存在至少两个不动点。对于不动点$(G^*,I^*,\beta^*)$，线性化该动力系统模型可得
+\begin{equation}\label{linear}
+    \begin{pmatrix}
+        \dot{G} \\
+        \dot{I} \\
+        \dot{\beta}
+    \end{pmatrix}=\begin{pmatrix}
+        -a_1-a_2I^*                            & -a_2G^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                  \\
+        \frac{2b_1\beta^*G^*}{(G^*)^2 + b_2^2} & -b_3                                            & \frac{b_1(G^*)^2}{(G^*)^2 + b_2^2} \\
+        r_1\beta^*-2r_2G^*\beta^*              & 0                                               & 0
+    \end{pmatrix}\begin{pmatrix}
+        G-G^* \\
+        I-I^* \\
+        \beta-\beta^*
+    \end{pmatrix}
+\end{equation}
+
+对于方程\ref{G^*}中较小的解$G_1^*$，线性化系统\ref{linear}中的雅可比矩阵的行列式为
+\begin{equation}
+    \begin{aligned}
+        \det&\begin{pmatrix}
+            -a_1-a_2I^*                                & -a_2G_1^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                      \\
+            \frac{2b_1\beta^*G_1^*}{(G_1^*)^2 + b_2^2} & -b_3                                              & \frac{b_1(G_1^*)^2}{(G_1^*)^2 + b_2^2} \\
+            r_1\beta^*-2r_2G_1^*\beta^*                & 0                                                 & 0
+        \end{pmatrix}\\
+        &=(r_1\beta^*-2r_2G_1^*\beta^*)(-a_2G_1^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2})( \frac{b_1(G_1^*)^2}{(G_1^*)^2 + b_2^2})
+    \end{aligned}
+\end{equation}
+我们有
+\begin{equation}
+    \begin{aligned}
+        r_1\beta^*-2r_2G_1^*\beta^*                       & >0 \\
+        -a_2G_1^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & <0 \\
+        \frac{b_1(G_1^*)^2}{(G_1^*)^2 + b_2^2}            & >0
+    \end{aligned}
+\end{equation}
+因此\begin{equation}
+    \det\begin{pmatrix}
+        -a_1-a_2I^*                                & -a_2G_1^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                      \\
+        \frac{2b_1\beta^*G_1^*}{(G_1^*)^2 + b_2^2} & -b_3                                              & \frac{b_1(G_1^*)^2}{(G_1^*)^2 + b_2^2} \\
+        r_1\beta^*-2r_2G_1^*\beta^*                & 0                                                 & 0
+    \end{pmatrix}<0，
+\end{equation}
+此时该不动点为鞍点(saddle)。
+
+对于方程\ref{G^*}中较大的解$G_2^*$，线性化系统\ref{linear}中的雅可比矩阵的行列式为
+\begin{equation}
+    \begin{aligned}
+        \det&\begin{pmatrix}
+            -a_1-a_2I^*                                & -a_2G_2^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                      \\
+            \frac{2b_1\beta^*G_2^*}{(G_2^*)^2 + b_2^2} & -b_3                                              & \frac{b_1(G_2^*)^2}{(G_2^*)^2 + b_2^2} \\
+            r_1\beta^*-2r_2G_2^*\beta^*                & 0                                                 & 0
+        \end{pmatrix}\\
+        &=(r_1\beta^*-2r_2G_2^*\beta^*)(-a_2G_2^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2})( \frac{b_1(G_2^*)^2}{(G_2^*)^2 + b_2^2})
+    \end{aligned}
+\end{equation}
+我们有
+\begin{equation}
+    \begin{aligned}
+        r_1\beta^*-2r_2G_2^*\beta^*                       & <0 \\
+        -a_2G_2^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & <0 \\
+        \frac{b_1(G_2^*)^2}{(G_2^*)^2 + b_2^2}            & >0
+    \end{aligned}
+\end{equation}
+因此
+\begin{equation}
+    \det \begin{pmatrix}
+        -a_1-a_2I^*                                & -a_2G_2^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                      \\
+        \frac{2b_1\beta^*G_2^*}{(G_2^*)^2 + b_2^2} & -b_3                                              & \frac{b_1(G_2^*)^2}{(G_2^*)^2 + b_2^2} \\
+        r_1\beta^*-2r_2G_2^*\beta^*                & 0                                                 & 0
+    \end{pmatrix}>0，
+\end{equation}
+且显然
+    \begin{equation}
+        \text{tr}\begin{pmatrix}
+            -a_1-a_2I^*                                & -a_2G_2^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                      \\
+            \frac{2b_1\beta^*G_2^*}{(G_2^*)^2 + b_2^2} & -b_3                                              & \frac{b_1(G_2^*)^2}{(G_2^*)^2 + b_2^2} \\
+            r_1\beta^*-2r_2G_2^*\beta^*                & 0                                                 & 0
+        \end{pmatrix}<0，
+    \end{equation}
+    因此该不动点为一个稳定不动点。
+    
+    若我们将$r_1$视为参数，则随着$r_1$的改变会引起不动点性质的变化，当$r_1$较小到满足$r_1^2-4\times r_2\times d_0=0$时，两个不动点重合且这时
+    \begin{equation}
+        \det \begin{pmatrix}
+        -a_1-a_2I^*                            & -a_2G^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} & 0                                  \\
+        \frac{2b_1\beta^*G^*}{(G^*)^2 + b_2^2} & -b_3                                            & \frac{b_1(G^*)^2}{(G^*)^2 + b_2^2} \\
+        r_1\beta^*-2r_2G^*\beta^*              & 0                                               & 0
+    \end{pmatrix}=0，
+    \end{equation}
+    当$r_1$再减小时，不动点消失，由定义可得，满足
+    \begin{equation}
+        r_1^2-4\times r_2\times d_0=0
+    \end{equation}
+    的$r_1$值为临界值，称为鞍-结分叉(saddle-node bifurcation)。
+我们有
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/betadynamic.png}
+    \caption{胰$\beta$细胞动力系统模型分岔}
+    \label{fig:bifurcation}
+\end{figure}
 
 由于胰$\beta$细胞数量变化较慢(一般以天为单位观测)，在实时血糖监测的过程中，我们以每次进食为数据分段标准，因此我们可以考虑将$\beta$细胞视为常量，仅考虑葡萄糖-胰岛素动力系统\cite{huard2022mathematical}。我们可以得到如下动力系统模型：
 \begin{equation}\label{11}
@@ -67,52 +229,22 @@
         \dot{I} & = \frac{b_1 G^2}{G^2 + b_2^2} - b_3 I
     \end{aligned}
 \end{equation}
-\begin{prop}
-    动力系统(\ref{11})有唯一不动点，且该不动点为吸引子
-\end{prop}
 
-\begin{pf}
-    为寻找该动力系统不动点，我们考查
-    \begin{equation}
-        a_0-a_1G^*-a_2G^*I^*+\frac{a_3}{a_4+(I^*)^p}= \frac{b_1 (G^*)^2}{(G^*)^2 + b_2^2} - b_3 I^*=0
-    \end{equation}
-    可以注意到$G^*$越大，$I^*$越大，令
-    \begin{equation}
-        h(G)=a_0-a_1G-a_2G\frac{b_1G^2}{b_3(G^2+b_2^2)}+\frac{a_3(b_3^p(G^2+b_2^2)^p)}{a_4(b_3^p(G^2+b_2^2)^p+b_1^pG^{2p})}
-    \end{equation}
-    可以得出$h(G)$单调递减，且$h(0)>0,\lim_{G\to\infty}h(G)<0$，易得$\exists !G^*$使得$h(G^*)=0$因此，动力系统(\ref{11})有唯一不动点。
+对于因为对胰岛素敏感性降低而引起的糖尿病，如图\ref{fig:hyperglycemia}所示，最终血糖的稳定浓度和胰岛素的稳定浓度都高于正常人。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/hyperglycemia.png}
+    \caption{胰岛素敏感性降低引起的糖尿病}
+    \label{fig:hyperglycemia}
+\end{figure}
 
-    在点$(G^*,I^*)$处线性化动力系统(\ref{11})可得
-    \begin{equation}\label{14}
-        \begin{pmatrix}
-            \dot{G} \\
-            \dot{I}
-        \end{pmatrix}=\begin{pmatrix}
-            -a_1-a_2I^*                              & -a_2G^*-\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2} \\
-            \frac{2b_1b_2^2G^*}{((G^*)^2 + b_2^2)^2} & -b_3
-        \end{pmatrix}\begin{pmatrix}
-            G \\
-            I
-        \end{pmatrix}
-    \end{equation}
-    线性动力系统(\ref{14})的特征多项式为$\lambda^2+c_1\lambda+c_2$，其中
-    \begin{equation*}
-        c_1=a_1+a_2I^*+b_3>0, c_2=(a_1+a_2I^*)b_3+\frac{2b_1b_2^2G^*}{((G^*)^2 + b_2^2)^2}(a_2G^*+\frac{pa_3(I^*)^{p-1}}{(a_4+(I^*)^p)^2})>0
-    \end{equation*}
-    两个特征值均有负实部，唯一不动点$(G^*,I^*)$为吸引子\cite{strogatz2018nonlinear}。
-
-\end{pf}
-\begin{prop}\label{prop2}
-    动力系统(\ref{11})全局渐近稳定(即有稳定极限环)
-\end{prop}
-\begin{pf}
-    考虑$g(G,I)=\frac{1}{I}$， 我们有
-    \begin{equation}
-        \nabla\cdot(g(\dot{G},\dot{I}))=\frac{-a_1}{I}-a_2-\frac{b_1 G^2}{I^2(G^2 + b_2^2)}<0
-    \end{equation}
-    由Dulac准则，(\ref{11})在$(0,+\infty)\times (0,+\infty)$中无闭轨，由于葡萄糖和胰岛素的值恒大于$0$， 由庞加莱-本迪克松定理知(\ref{11})有稳定极限环，该极限环为唯一不动点$(G^*,I^*)$
-\end{pf}
-
+对于常见的二型糖尿病，可能是胰$\beta$细胞数量较少，如图\ref{fig:beta}所示，也可能是胰岛素分泌速率更低，如图\ref{fig:lessinsulin}所示，最终血糖的稳定浓度高于正常人，胰岛素浓度低于正常人，可以通过外界注入胰岛素来使血糖值正常。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Img/lessinsulin.png}
+    \caption{胰岛素分泌速率降低引起的糖尿病}
+    \label{fig:lessinsulin}
+\end{figure}
 \section{模型参数估计方法}
 在实际应用中，我们需要根据实验数据估计模型参数。在估计模型参数时，我们通常使用最小二乘法来拟合模型。最小二乘法是一种常用的参数估计方法，它通过最小化实际观测值和模型预测值之间的残差平方和来估计模型参数。
 
@@ -135,12 +267,12 @@
                   I_{t+1} & = I_{t-1} + 2\Delta t \left(\frac{b_1 G_t^2}{G_t^2 + b_2^2} - b_3 I_t\right)
               \end{aligned}
           \end{equation}
-    \item 以每次进食为一个阶段将同一个人的数据分为$(G_{ij}, t_{ij})$，其中$j$表示第j阶段进食，通过差分方程算出来的葡萄糖数值为$f(\theta)$,定义损失函数：
+    \item 给定一个人一段时间没有外界糖类输入的血糖值向量$(G_i,t_i)_{i=1}^n$，通过差分方程算出来的葡萄糖数值为$f(\theta)$，是一个向量，长度为$n$，对应的是$t_i$时间通过差分方程算出来的血糖值,定义损失函数：
           \begin{equation}
-              L(\theta) = \sum_{j=1}^{m} \Vert \mathbf{G_j}-f(\theta) \Vert_2^2+\epsilon\Vert \theta \Vert_2
+              L(\theta) = \Vert\mathbf{G}-f(\theta) \Vert_2^2+\epsilon\Vert \theta \Vert_2
           \end{equation}
           其中$\epsilon$是正则化参数，用于防止过拟合。
-    \item 由命题\ref{prop2}，我们可以保证模型参数估计的稳定性和收敛性。因此我们可以直接使用梯度下降法求解。
+    \item 我们可以使用梯度下降法求解。
           \begin{equation}
               \theta^* = \arg\min_{\theta} L(\theta)
           \end{equation}

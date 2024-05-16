@@ -1,4 +1,4 @@
-\chapter{背景介绍}\label{chap:background}
+\chapter{数学基础}\label{chap:background}
 \section{矩阵特征值和特征向量}
 \begin{defn}[特征值和特征向量]
     给定一个方阵 \( A \in \mathbb{R}^{n \times n} \)，特征值 \( \lambda \) 和特征向量 \( \mathbf{v} \in \mathbb{R}^n \) 满足以下方程：
@@ -111,4 +111,64 @@ A \mathbf{v} = \lambda \mathbf{v}
         d(x^*, y^*) = d(f(x^*), f(y^*)) \leq k \cdot d(x^*, y^*)
     \end{equation*}
     由于$0 \leq k < 1$，所以$d(x^*, y^*) = 0$，即$x^* = y^*$，所以$x^*$是唯一的不动点。
+\end{pf}
+
+\section{Grönwall不等式}
+
+Grönwall不等式是一个给出函数上界的不等式，是证明一些微分方程问题的重要工具。
+\begin{thm}[Grönwall不等式(积分形式)]
+    令$I$是$[a,b],[a,b)$或$[a,+\infty)$形式的区间，$\alpha,\beta,u$是三个定义在$I$上的实值函数，其中$\beta$非负连续，$u$连续，$\alpha$的非负部分在$I$的任意有界闭子区间上可积，若对于$I$中的任意$t$，$u$都满足
+    \begin{equation}\label{eq:gronwall}
+        u(t) \leq \alpha(t) + \int_{a}^{t} \beta(s)u(s) ds
+    \end{equation}
+    那么
+    \begin{equation}
+        u(t) \leq \alpha(t) + \int_{a}^{t} \alpha(s)\beta(s) e^{\int_{s}^{t} \beta(r) dr} ds，\forall t \in I
+    \end{equation}
+    如果$\alpha$是一个不减函数，那么
+    \begin{equation}\label{eq:gronwall2}
+        u(t) \leq \alpha(t) e^{\int_{a}^{t} \beta(s) ds}，\forall t \in I
+    \end{equation}
+\end{thm}
+\begin{pf}
+    我们引入一个函数$v(t)$，定义为
+    \begin{equation}
+        v(t) = e^{-\int_{a}^{t} \beta(s) ds}\int_{a}^{t} \beta(s) u(s)ds
+    \end{equation}
+    对$v(t)$求导，得到
+    \begin{equation}\label{eq:gronwall_proof}
+        \begin{aligned}
+            v'(t) & = -\beta(t) e^{-\int_{a}^{t} \beta(s) ds}\int_{a}^{t} \beta(s) u(s)ds + e^{-\int_{a}^{t} \beta(s) ds} \beta(t) u(t)\\
+            & = e^{-\int_{a}^{t} \beta(s) ds} \beta(t) (u(t)-\int_{a}^{t} \beta(s) u(s)ds)\\
+            & \leq e^{-\int_{a}^{t} \beta(s) ds} \beta(t) \alpha(t)(\text{由式\ref{eq:gronwall}})
+        \end{aligned}
+    \end{equation}
+    由于$\beta$非负，所以不等式\ref{eq:gronwall_proof}给出了$v(t)$的导数的上界。由于$v(a)=0$，对$v(s)$从$a$到$t$积分，得到
+    \begin{equation}\label{eq:gronwall_proof2}
+        \begin{aligned}
+            v(t) & = \int_{a}^{t} v'(s) ds\\
+            & \leq \int_{a}^{t} e^{-\int_{a}^{s} \beta(r) dr} \beta(s) \alpha(s) ds
+        \end{aligned}
+    \end{equation}
+    由$v(t)$的定义，我们有
+    \begin{equation}
+        \begin{aligned}
+            \int_a^t \beta(s) u(s) ds & = e^{\int_a^t \beta(s) ds} v(t)，\text{由\ref{eq:gronwall_proof2}得}\\
+            &\leq \int_a^t \alpha(s) \beta(s) e^{(\int_a^t \beta(r) dr-\int_{a}^{s} \beta(r) dr)} ds\\
+            &= \int_a^t \alpha(s) \beta(s) e^{\int_s^t \beta(r) dr} ds
+        \end{aligned}
+    \end{equation}
+    结合式\ref{eq:gronwall}，我们有
+    \begin{equation}
+        u(t) \leq \alpha(t) + \int_a^t \alpha(s) \beta(s) e^{\int_s^t \beta(r) dr} ds
+    \end{equation}
+    如果$\alpha$是一个不减函数，那么$\alpha(s) \leq \alpha(t)$，所以
+    \begin{equation}
+        \begin{aligned}
+            u(t) & \leq \alpha(t) + \int_a^t \alpha(s) \beta(s) e^{\int_s^t \beta(r) dr} ds\\
+            & \leq \alpha(t) + \int_a^t \alpha(t) \beta(s) e^{\int_s^t \beta(r) dr} ds\\
+            & = \alpha(t) +\alpha(t)\left[-e^{\int_s^t \beta(r)dr}\right]_{s=a}^{s=t}\\
+            & = \alpha(t) e^{\int_a^t \beta(s) ds}
+        \end{aligned}
+    \end{equation}
 \end{pf}
