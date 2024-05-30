@@ -59,12 +59,12 @@
     ],
     "latex-workshop.latex.recipes": [
         {
-            "name": "lualatex -> bibtex -> lualatex*2",
+            "name": "Xelatex -> bibtex -> Xelatex*2",
             "tools": [
-                "lualatex",
+                "xelatex",
                 "bibtex",
-                "lualatex",
-                "lualatex"
+                "xelatex",
+                "xelatex"
             ]
         },
         {

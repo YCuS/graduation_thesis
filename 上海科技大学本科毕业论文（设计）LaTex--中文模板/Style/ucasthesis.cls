@@ -99,7 +99,7 @@
 \setlength{\voffset}{-17.4mm}% set vertical offset
 \setlength{\topmargin}{20pt}% vertical margin above header
 \setlength{\headheight}{12pt}% header height
-\setlength{\headsep}{17.5pt}% vertical margin between header and body text
+\setlength{\headsep}{27.5pt}% vertical margin between header and body text
 \setlength{\footskip}{29.5pt}% vertical margin between footer and body text
 %- specifies the amount of space between paragraphs.
 \setlength{\parskip}{0.5ex plus 0.25ex minus 0.25ex}
@@ -120,8 +120,8 @@
 }
 %- underline
 \ifxetex% use underline from xeCJKfntef
-    \renewcommand{\CJKunderlinecolor}{\color[rgb]{0,0,0}}% set underline color
-    \renewcommand{\uline}[1]{\CJKunderline{#1}}% unified name
+    \newcommand{\CJKunderlinecolor}{\color[rgb]{0,0,0}}% set underline color
+    \newcommand{\uline}[1]{\CJKunderline{#1}}% unified name
 \else% use underline from ulem
     \RequirePackage{ulem}%
 \fi
