@@ -1,4 +1,4 @@
-\begin{thebibliography}{30}
+\begin{thebibliography}{32}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{#1}
 \providecommand{\href}[2]{\url{#2}}
@@ -92,16 +92,26 @@ DE~GAETANO A, ARINO O.
   test\allowbreak[J].
 \newblock Journal of mathematical biology, 2000, 40: 136--168.
 
-\bibitem[Murray\ et~al.(2013)Murray and Miller]{murray2013existence}
-MURRAY F~J, MILLER K~S.
-\newblock Existence theorems for ordinary differential equations\allowbreak[M].
-\newblock [S.l.]: Courier Corporation, 2013: 50.
+\bibitem[Treil(2016)]{treil2016linear}
+TREIL S.
+\newblock Linear algebra done wrong\allowbreak[Z].
+\newblock [S.l.: s.n.], 2016.
 
 \bibitem[Blanchard\ et~al.(2006)Blanchard, Devaney, and
   Hall]{enwiki:1216903952}
 BLANCHARD P, DEVANEY R, HALL G.
 \newblock Differential equations thomson\allowbreak[J].
 \newblock Boston, MA, USA: Brooks/Cole, 2006: 96--111.
+
+\bibitem[Rudin\ et~al.(1964)Rudin et~al.]{rudin1964principles}
+RUDIN W, et~al.
+\newblock Principles of mathematical analysis: volume~3\allowbreak[M].
+\newblock [S.l.]: McGraw-hill New York, 1964.
+
+\bibitem[Murray\ et~al.(2013)Murray and Miller]{murray2013existence}
+MURRAY F~J, MILLER K~S.
+\newblock Existence theorems for ordinary differential equations\allowbreak[M].
+\newblock [S.l.]: Courier Corporation, 2013: 50.
 
 \bibitem[Andronov\ et~al.(1974)Andronov, Leontovich, Gordon, Maier, and
   Gutzwiller]{andronov1974qualitative}

@@ -1,0 +1,23 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Best et~al.(1981)Best, Taborsky~Jr, Halter, and
+  Porte~Jr]{best1981glucose}
+James~D Best, Gerald~J Taborsky~Jr, Jeffrey~B Halter, and Daniel Porte~Jr.
+\newblock Glucose disposal is not proportional to plasma glucose level in man.
+\newblock \emph{Diabetes}, 30\penalty0 (10):\penalty0 847--850, 1981.
+
+\bibitem[Topp et~al.(2000)Topp, Promislow, Devries, Miura, and
+  T~FINEGOOD]{topp2000model}
+Brian Topp, Keith Promislow, Gerda Devries, Robert~M Miura, and DIANE
+  T~FINEGOOD.
+\newblock A model of $\beta$-cell mass, insulin, and glucose kinetics: pathways
+  to diabetes.
+\newblock \emph{Journal of theoretical biology}, 206\penalty0 (4):\penalty0
+  605--619, 2000.
+
+\end{thebibliography}
